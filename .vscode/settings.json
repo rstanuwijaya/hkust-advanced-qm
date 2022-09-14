@@ -7,5 +7,6 @@
             ]
         }
     ],
-    "latex-workshop.latex.autoBuild.run": "onSave"
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "editor.wordWrap": "on",
 }

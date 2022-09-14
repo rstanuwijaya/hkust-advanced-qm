@@ -1,0 +1,356 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+\renewcommand{\sectionPrefix}{Problem }
+
+\title{PHYS 5260 HW1}
+\author{TANUWIJAYA, Randy Stefan \\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+
+
+\begin{document}
+	\maketitle
+	\begin{section}{Sakurai 1.3}
+		\newcommand{\nhat}{\boldsymbol{\hat{n}}}
+		\newcommand{\sigdotn}{\boldsymbol{\sigma \cdot \hat{n}}}
+
+		Show that the determinant of a $2 \times 2$ matrix $\boldsymbol{\sigma \cdot a}$ is invariant under
+		\begin{equation*}
+			\boldsymbol{\sigma \cdot a} \rightarrow \boldsymbol{\sigma \cdot a'} \equiv 
+				\exp{{\frac{i \sigdotn \phi}{2}}} 
+				\boldsymbol{\sigma \cdot a}
+				\exp{{\frac{-i \sigdotn \phi}{2}}}
+		\end{equation*}
+		Find $a'_k$ in terms of of $a_k$ when $\nhat$ is in the positive $z$-direction and interpret your result.
+		\begin{tcolorbox}[breakable]
+			Note the following properties of the matrix determinant: $|ABC| = |A||B||C|$. Therefore, to prove the invariance, we need to show that: $\left|\boldsymbol{\sigma \cdot a}\right| = \left|\boldsymbol{\sigma \cdot a'}\right|$. In this case, $\left|\boldsymbol{\sigma \cdot a'}\right|$ can be expanded as:
+		\begin{equation*}
+			\left|\boldsymbol{\sigma \cdot a'}\right| =
+			\left|
+				\exp{{\frac{i \sigdotn \phi}{2}}} 
+			\right|
+			\left|
+				\boldsymbol{\sigma \cdot a}
+			\right|
+			\left|
+				\exp{{\frac{-i \sigdotn \phi}{2}}}
+			\right|
+		\end{equation*}
+
+		Since the two exponential terms are the inverse of each others, it follows that: 
+		\begin{equation*}
+			\left|
+				\exp{{\frac{i \sigdotn \phi}{2}}} 
+			\right|
+			\left|
+				\exp{{\frac{-i \sigdotn \phi}{2}}}
+			\right|
+			= 1
+		\end{equation*}
+
+		Therefore, we have:
+		\begin{equation*}
+			\left|\boldsymbol{\sigma \cdot a}\right| =
+			\left|
+				\boldsymbol{\sigma \cdot a'}
+			\right| \qed
+		\end{equation*}
+
+		For $\nhat = (0,0,1)$, we have $\sigdotn = \sigma_k = \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}$. 
+		Since $\sigma_k$ is diagonal matrix, the expononential terms can be expressed as:
+		\begin{align*}
+			\exp{{\frac{i \sigdotn \phi}{2}}} &= 
+			\begin{pmatrix}
+				\exp{i \phi / 2} & 0 \\
+				0 & \exp{-i \phi / 2}
+			\end{pmatrix} \\
+			\exp{{\frac{-i \sigdotn \phi}{2}}} &= 
+			\begin{pmatrix}
+				\exp{-i \phi / 2} & 0 \\
+				0 & \exp{i \phi / 2}
+			\end{pmatrix} \\
+		\end{align*}
+
+		Therefore:
+		\begin{align*}
+			\sigma_k a_k' = 
+			\begin{pmatrix}
+				\exp{i \phi / 2} & 0 \\
+				0 & \exp{-i \phi / 2}
+			\end{pmatrix}
+			\begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}
+			\begin{pmatrix}
+				\exp{-i \phi / 2} & 0 \\
+				0 & \exp{i \phi / 2} 
+			\end{pmatrix}
+			a_k
+		\end{align*}
+
+		Solving for $a_k'$, we obtain $a_k' = a_k$. This means that $\boldsymbol{\sigma \cdot a}$  i.e., the angular momentum is invariant under rotation about the $z$-axis.
+		\end{tcolorbox}
+	\end{section}
+
+	\newpage
+	\begin{section}{Sakurai 1.6}
+		Suppose $\ket{i}$ and $\ket{j}$ are eigenkets of some Hermitian operator $A$. Under what condition we conclude that $\ket{i} + \ket{j}$ is also an eigenket of $A$? Justify your answer.
+		
+		\begin{tcolorbox}
+			Suppose the eigenvalues of each eigenkets are given by: $E_i$ and $E_j$. \begin{align*}
+				A \ket{i} &= E_i \ket{i} \\
+				A \ket{j} &= E_j \ket{j}
+			\end{align*}
+			Summing the two equations, we have:
+			\begin{equation*}
+				A \ket{i} + A \ket{j} = E_i \ket{i} + E_j \ket{j} = E (\ket{i} + \ket{j})
+			\end{equation*}
+
+			The last equation only holds when $E = E_i + E_j$. This equation only holds when $A$ is degenerate, and $\ket{i}$ and $\ket{j}$ are corresponding eigenkets.
+		\end{tcolorbox}
+	\end{section}
+
+	\newpage
+	\begin{section}{Sakurai 1.9}
+		\newcommand{\sdotn}{\boldsymbol{S \cdot \hat{n}}}
+		\newcommand{\sdotnplus}{\ket{\sdotn; +}}
+
+		Construct $\sdotnplus$ such that:
+		\begin{align*}
+			\sdotn \sdotnplus = \pbracket{\frac{\hbar}{2}} \sdotnplus
+		\end{align*}
+		where $\boldsymbol{\hat{n}}$ is characterized by the angles shown in the accompanying figure. Express your answer as a linear combination of $\ket{+}$ and $\ket{-}$.
+	
+		\begin{tcolorbox}[breakable]
+			Let the vector $n$ and the spin operator $S$ be given by:
+			\begin{align*}
+				\boldsymbol{\hat{n}} &= \cos{\alpha}\sin{\beta} \boldsymbol{\hat{x}} + \sin{\alpha}\sin{\beta} \boldsymbol{\hat{y}} + \cos{\beta} \boldsymbol{\hat{z}} \\
+				\boldsymbol{S} &= \frac{\hbar}{2} \pbracket{\sigma_x \boldsymbol{\hat{x}} + \sigma_y \boldsymbol{\hat{y}} + \sigma_z \boldsymbol{\hat{z}}}
+			\end{align*}
+
+			The inner product is thus given by:
+			\begin{align*}
+				\sdotn &= \frac{\hbar}{2} 
+					\left(
+					\begin{array}{cc}
+					 \cos (\beta ) & \cos (\alpha ) \sin (\beta )-i \sin (\alpha ) \sin (\beta ) \\
+					 \cos (\alpha ) \sin (\beta )+i \sin (\alpha ) \sin (\beta ) & -\cos (\beta ) \\
+					\end{array}
+					\right) \\
+					&= \frac{\hbar}{2} 
+					\left(
+						\begin{array}{cc}
+						 \cos (\beta ) & e^{-i \alpha} \sin (\beta ) \\
+						 e^{i \alpha} \sin (\beta ) & -\cos (\beta ) \\
+						\end{array}
+					\right)
+			\end{align*}
+
+			Solving the eigenvalue problem for $\sdotn$, we obtain the condition:
+			\begin{equation*}
+				|\sdotn - Iv| = 0 \iff v = \pm \frac{\hbar}{2}
+			\end{equation*}
+			which is consistent with the problem statement.
+
+			To find the corresponding eigenvectors for the eigenvalue $+1$, we solve the following equation:
+			\begin{equation*}
+				\frac{\hbar}{2}
+				\left(
+					\begin{array}{cc}
+					 \cos (\beta ) & e^{-i \alpha} \sin (\beta ) \\
+					 e^{i \alpha} \sin (\beta ) & -\cos (\beta ) \\
+					\end{array}
+				\right)
+				\begin{pmatrix}
+					x \\ 
+					y
+				\end{pmatrix}
+				= \frac{\hbar}{2}
+				\begin{pmatrix}
+					x \\ 
+					y
+				\end{pmatrix}
+		\end{equation*}
+
+		We obtain the solution:
+		\begin{align*}
+			x (\cos{\beta} -1) + y e^{-i \alpha} \sin{\beta} &= 0 \\
+			x e^{i \alpha} \sin{\beta / 2}  + y \cos{\beta / 2} &= 0
+		\end{align*}
+
+		Therefore:
+		\begin{equation*}
+			\sdotnplus = \cos{\beta / 2} \ket{+} + e^{-i \alpha} \sin{\beta / 2} \ket{-}
+		\end{equation*}
+		\end{tcolorbox}
+	\end{section}
+
+	\newpage
+	\begin{section}{Sakurai 1.12}
+		\newcommand{\nbold}{\boldsymbol{\hat{n}}}
+		\newcommand{\sdotn}{\boldsymbol{S \cdot \hat{n}}}
+		\newcommand{\sdotnplus}{\ket{\sdotn; +}}
+		\newcommand{\sdotnminus}{\ket{\sdotn; -}}
+
+		A spin $\frac{1}{2}$ system to be in an eigenstate of $\sdotn$ with eigenvalue $\hbar/2$, where $\nbold$ is a unit vector lying in $xz$-plane that makes an angle $\gamma$ with the positive $z$-axis.
+
+		\begin{enumerate}
+			\item Suppose $S_x$ is measured. WHat is the probability of getting $+\hbar/2$?
+			
+			\begin{tcolorbox}[breakable]
+				The state of the given system and the eigenstate of spin $x$ with the eigenvalue of $\hbar/2$ can be written as:
+				\begin{align*}
+					\ket{\psi} = \ket{\boldsymbol{S \cdot \hat{n}}; +} &= \cos{\gamma / 2} \ket{+} + \sin{\gamma / 2} \ket{-} \\
+					\ket{\boldsymbol{S \cdot \hat{x}}; +} &= \frac{1}{\sqrt{2}} \ket{+} + \frac{1}{\sqrt{2}} \ket{-}
+				\end{align*}
+
+				Therefore, the probability of getting $\ket{\boldsymbol{S \cdot \hat{x}}; +}$ is given by:
+				\begin{align*}
+					\left|\bra{\boldsymbol{S \cdot \hat{x}}; +} \ket{\psi}\right|^2 &= 
+						\pbracket{\frac{1}{\sqrt{2}} (\cos{\gamma / 2} + \sin{\gamma / 2})}^2 \\
+					&= \frac{1+ \sin{\gamma}}{2}
+				\end{align*}
+			\end{tcolorbox}
+
+			\item Evaluate the dispersion in $S_x$ - that is,
+			\newcommand{\expc}[1]{\left<#1\right>}
+			\begin{equation*}
+				\expc{\pbracket{S_x - \expc{S_x}}^2}
+			\end{equation*}
+
+			\begin{tcolorbox}
+				The expectation values of $S_x$ and $S_x^2$ are given by:
+				\begin{align*}
+					\expc{S_x} &= \bra{\psi}{S_x}\ket{\psi} = \frac{\hbar}{2} \sin{\gamma} \\
+					\expc{S_x^2} &= \bra{\psi}{S_x^2}\ket{\psi} = \frac{\hbar^2}{4}
+				\end{align*}
+
+				Therefore, the dispersion is given by:
+				\begin{align*}
+					\expc{\pbracket{S_x - \expc{S_x}}^2} = \expc{S_x^2} - \expc{S_x}^2 &= \frac{\hbar^2}{4} \cos^2{\gamma}
+				\end{align*}
+			\end{tcolorbox}
+		\end{enumerate}
+	\end{section}
+
+	\newpage
+	\begin{section}{Sakurai 1.15}
+		Let $A$ and $B$ be observables. Suppose the simultaneous eigekets of $A$ and $B$ $\left\{\ket{a', b'}\right\}$ form a complete orthonormal set of base kets. Can we always conclude that
+		\begin{equation*}
+			[A, B] = 0
+		\end{equation*}
+
+		\begin{tcolorbox}
+			Yes. Suppose $\ket{a', b'}$ is the simultaneous eigenstates of $A$ and $B$, then:
+			\begin{align*}
+				A\ket{a', b'} &= a' \ket{a', b'} \\
+				B\ket{a', b'} &= b' \ket{a', b'}
+			\end{align*}
+
+			Consider the following equations:
+			\begin{align*}
+				BA\ket{a', b'} &= a' B\ket{a', b'} &= a'b' \ket{a', b'}\\
+				AB\ket{a', b'} &= b' A\ket{a', b'} &= b'a' \ket{a', b'}
+			\end{align*}
+
+			Therefore, subtracting the two equations above, we obtain the commutator:
+			\begin{align*}
+				[A, B] \ket{a', b'} &= BA\ket{a', b'} - AB\ket{a', b'} = 0
+			\end{align*}
+		\end{tcolorbox}
+
+	\end{section}
+
+	\newpage
+	\begin{section}{Sakurai 1.18}
+		% \newcommand{\Re}[1]{\text{Re}{#1}}
+		% \newcommand{\Im}[1]{\text{Im}{#1}}
+		\newcommand{\expc}[1]{\left<#1\right>}
+
+		\begin{enumerate}
+			\item The simplest way to derive the Schwarz inequality goes as follows. First, observe
+			$$
+			(\bra{\alpha} + \lambda^*\bra{\beta}) \cdot (\ket{\alpha} + \lambda\ket{\beta}) \geq 0
+			$$
+			for any complex number $\lambda$; then choose $\lambda$ in such a way that the preceeding inequality reduces to the Schwarz inequality.
+
+			\begin{tcolorbox}
+				Let $\lambda = x + iy$. Then:
+				\begin{align*}
+					0 &\leq (\bra{\alpha} + \lambda^*\bra{\beta}) \cdot (\ket{\alpha} + \lambda\ket{\beta}) \\
+					0 &\leq \braket{\alpha} + \lambda \braket{\alpha}{\beta} + \lambda^* \braket{\beta}{\alpha} + |\lambda|^2 \braket{\beta} \\
+					0 &\leq \braket{\alpha} + \lambda \braket{\beta}{\alpha}^* + \lambda^* \braket{\beta}{\alpha} + |\lambda|^2 \braket{\beta} \\
+					0 &\leq \frac{\braket{\alpha}}{\braket{\beta}} + \frac{2x \Re \braket{\beta}{\alpha}}{\braket{\beta}} + \frac{2y \Im \braket{\beta}{\alpha}}{\braket{\beta}} + (x^2 + y^2)\\
+					0 &\leq \pbracket{x + \frac{\Re \braket{\beta}{\alpha}}{\braket{\beta}}}^2 + \pbracket{y + \frac{\Im \braket{\beta}{\alpha}}{\braket{\beta}}}^2 + \frac{\braket{\alpha}\braket{\beta} - |\braket{\beta}{\alpha}|^2}{\braket{\beta}^2} \\
+				\end{align*}
+
+				Note that the first two terms must be larger than $0$. Then we can see the Schwarz inequality on the last term, which is:
+				\begin{equation*}
+					\braket{\alpha}\braket{\beta} - |\braket{\beta}{\alpha}|^2 \geq 0
+				\end{equation*}
+			\end{tcolorbox}
+
+			\item Show that the equality sign in the generalized uncertainty relation holds if the state in question satisfies
+			$$
+				\Delta A \ket{\alpha} = \lambda \Delta B \ket{\beta}
+			$$
+			with $\lambda$ purely imaginary.
+
+			\begin{tcolorbox}[breakable]
+				Recall the generalized uncertainty principle:
+				$$
+					\expc{(\Delta A)^2} \expc{(\Delta B)^2} \geq \frac{1}{4} \left|\expc{[A,B]}\right|^2
+				$$
+
+				The expectation value of commutator $[A,B] = [\Delta A, \Delta B]$ is given by:
+				\begin{align*}
+					\expc{[\Delta A, \Delta B]} &= \bra{\alpha}\Delta A \Delta B - \Delta B \Delta A \ket{\alpha} \\
+					&= (\lambda^* - \lambda) \bra{\alpha} (\Delta B)^2 \ket{\alpha} \\
+					&= -2\lambda \expc{(\Delta B)^2}
+				\end{align*}
+
+				since $\lambda^* = -\lambda$.
+				
+				Then, note that $\expc{(\Delta A)^2} = |\lambda|^2 \expc{(\Delta B)^2}$. Therefore, both sides of the inequality are equal to $|\lambda|^2 \expc{(\Delta B)^2}^2$.
+			\end{tcolorbox}
+
+			\item Explicit calculations using the usual rules of wave mechanics show that the wave function for a Gaussian wave packet is given by:
+			$$
+				\braket{x'}{\alpha} = (2\pi d^2)^{-1/4} \exp\left[\frac{i \expc{p}x'}{\hbar} - \frac{(x' - \expc{x}^2)}{4d^2}\right]
+			$$
+			satisfies the minimum uncertainty relation
+			$$
+				\sqrt{\expc{(\Delta x)^2}} \sqrt{\expc{(\Delta p)^2}} = \frac{\hbar}{2}
+			$$
+
+			Prove that the requirement:
+			$$
+				\bra{x'}\Delta x\ket{\alpha} = (\text{imaginary number})\bra{x'}\Delta p\ket{\alpha}
+			$$
+			is indeed satisfied for such a Gaussian wave packet, in agreement with (b).
+
+			\begin{tcolorbox}
+				Begin with expanding $\bra{x'}\Delta x\ket{\alpha}$ and $\bra{x'}\Delta p\ket{\alpha}$
+
+				\begin{align*}
+					\bra{x'}\Delta x\ket{\alpha} &= (x' - \expc{x}) \braket{x'}{\alpha} \\
+					\bra{x'}\Delta p\ket{\alpha} &= \pbracket{\frac{\hbar}{i} \frac{d}{dx} - \expc{p}} \braket{x'}{\alpha}
+				\end{align*}
+
+				where
+				\begin{align*}
+					\frac{\hbar}{i} \frac{d}{dx} \braket{x'}{\alpha} = 
+						\pbracket{\expc{p} - \frac{\hbar}{i} \frac{1}{2d^2} (x' - \expc{x})^2} \braket{x'}{\alpha} \\
+				\end{align*}
+
+				Therefore:
+				\begin{align*}
+					\bra{x'}\Delta x\ket{\alpha} = - \frac{\hbar}{i} \frac{1}{2d^2} \bra{x'}\Delta p\ket{\alpha}
+				\end{align*}
+				which is consistent with the result in (b) as the factor is purely imaginary. 
+			\end{tcolorbox}
+		\end{enumerate}
+
+
+	\end{section}
+\end{document}
