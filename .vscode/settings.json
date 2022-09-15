@@ -1,4 +1,5 @@
 {
+    "editor.wordWrap": "on",
     "latex-workshop.latex.recipes": [
         {
             "name": "pdflatex 🔃",
@@ -8,5 +9,10 @@
         }
     ],
     "latex-workshop.latex.autoBuild.run": "onSave",
-    "editor.wordWrap": "on",
+    "latex-workshop.latexindent.args": [
+        "-c",
+        "%DIR%/",
+        "%TMPFILE%",
+        "-l=%WORKSPACE_FOLDER%/.latexindent.yaml"
+    ]
 }
