@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+\renewcommand{\sectionPrefix}{Problem }
+
+\title{HW2}
+\author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
+\\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\newcommand{\expc}[1]{\left<#1\right>}
+	\begin{section}{Sakurai 1.21}
+		\newcommand{\wf}{\sin \left( \frac{n \pi}{a} x \right)}
+		Evaluate the $x-p$ uncertainty product $\expc{(\Delta x)^2} \expc{(\Delta p)^2}$ for a one-dimensional particle confined between two rigid walls,
+
+		\begin{align*}
+			V = \begin{cases}
+				0 & \text{for $0 < x < a$,} \\
+				\infty & \text{otherwise.}
+			\end{cases}
+		\end{align*}
+
+		Do this for both the ground and excited states.
+		\begin{tcolorbox}[breakable]
+			The wavefunction for the particle can be found by solving the Schrodinger equation:
+			\begin{align*}
+				H \psi(x) &= E_n \psi(x) \\
+				- \frac{\hbar^2}{2m} \frac{d^2}{dx^2} \psi(x) &= E_n \psi(x) 
+			\end{align*}
+			
+			Solving the differential equation and normalizing, we get the wavefunction for $0 < x < a$:
+			\begin{align*}
+				\psi(x) = A \sin \left( k x \right) = \sqrt{\frac{2}{a}} \wf
+			\end{align*}
+			and for $\psi(x) = 0$ for $x > a$:
+
+			The expectation value of any operator $\hat A$ is given by:
+			\begin{align*}
+				\expc{\hat A} &= \int_0^\infty \psi(x)^* A \psi(x) dx \\
+				&= \int_0^a \frac{2}{a} \wf \hat A \wf dx  
+			\end{align*}
+
+			Thus the expectation value of the following operators are:
+			\begin{align*}
+				\expc{x} &= \frac{a}{2} \\
+				\expc{x^2} &= \frac{2a^2}{6} \\
+				\expc{p} &= 0 \\
+				\expc{p^2} &= \frac{-\hbar^2 n^2 \pi^2}{a^2}
+			\end{align*}
+
+			Substituting these values into the uncertainty product, we get:
+			\begin{align*}
+				\expc{(\Delta x)^2} \expc{(\Delta p)^2} &= \left(\expc{x^2} - \expc{x^2}\right) \left(\expc{p^2} - \expc{p}^2\right) \\
+				&= \frac{\hbar}{12} (-6 + n^2 \pi^2) \\
+			\end{align*}
+
+			For ground state $n=1$, 
+			\begin{align*}
+				\expc{(\Delta x)^2} \expc{(\Delta p)^2} = \frac{\hbar}{12} (-6 + \pi^2) \approx 0.322 \hbar^2
+			\end{align*}
+			which implies that the uncertainty principle holds, i.e. larger than $\hbar^2/4$. For excited states $n > 1$, the uncertainty principle also holds.
+		\end{tcolorbox}
+	\end{section}
+\end{document}
