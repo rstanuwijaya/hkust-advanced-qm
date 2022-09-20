@@ -10,58 +10,162 @@
 \date{\today}
 
 \begin{document}
-	\maketitle
-	\newcommand{\expc}[1]{\left<#1\right>}
-	\begin{section}{Sakurai 1.21}
-		\newcommand{\wf}{\sin \left( \frac{n \pi}{a} x \right)}
-		Evaluate the $x-p$ uncertainty product $\expc{(\Delta x)^2} \expc{(\Delta p)^2}$ for a one-dimensional particle confined between two rigid walls,
+\maketitle
+\newcommand{\expc}[1]{\left<#1\right>}
+\begin{section}{Sakurai 1.21}
+\newcommand{\wf}{\sin \left( \frac{n \pi}{a} x \right)}
+Evaluate the $x-p$ uncertainty product $\expc{(\Delta x)^2} \expc{(\Delta p)^2}$ for a one-dimensional particle confined between two rigid walls,
 
+\begin{align*}
+	V = \begin{cases}
+		    0      & \text{for $0 < x < a$,} \\
+		    \infty & \text{otherwise.}
+	    \end{cases}
+\end{align*}
+
+Do this for both the ground and excited states.
+\begin{tcolorbox}[breakable]
+	The wavefunction for the particle can be found by solving the Schrodinger equation:
+	\begin{align*}
+		H \psi(x)                                     & = E_n \psi(x) \\
+		- \frac{\hbar^2}{2m} \frac{d^2}{dx^2} \psi(x) & = E_n \psi(x)
+	\end{align*}
+
+	Solving the differential equation and normalizing, we get the wavefunction for $0 < x < a$:
+	\begin{align*}
+		\psi(x) = A \sin \left( k x \right) = \sqrt{\frac{2}{a}} \wf
+	\end{align*}
+	and for $\psi(x) = 0$ for $x > a$:
+
+	The expectation value of any operator $\hat A$ is given by:
+	\begin{align*}
+		\expc{\hat A} & = \int_0^\infty \psi(x)^* A \psi(x) dx   \\
+		              & = \int_0^a \frac{2}{a} \wf \hat A \wf dx
+	\end{align*}
+
+	Thus the expectation value of the following operators are:
+	\begin{align*}
+		\expc{x}   & = \frac{a}{2}                    \\
+		\expc{x^2} & = \frac{2a^2}{6}                 \\
+		\expc{p}   & = 0                              \\
+		\expc{p^2} & = \frac{-\hbar^2 n^2 \pi^2}{a^2}
+	\end{align*}
+
+	Substituting these values into the uncertainty product, we get:
+	\begin{align*}
+		\expc{(\Delta x)^2} \expc{(\Delta p)^2} & = \left(\expc{x^2} - \expc{x^2}\right) \left(\expc{p^2} - \expc{p}^2\right) \\
+		                                        & = \frac{\hbar}{12} (-6 + n^2 \pi^2)                                         \\
+	\end{align*}
+
+	For ground state $n=1$,
+	\begin{align*}
+		\expc{(\Delta x)^2} \expc{(\Delta p)^2} = \frac{\hbar}{12} (-6 + \pi^2) \approx 0.322 \hbar^2
+	\end{align*}
+	which implies that the uncertainty principle holds, i.e. larger than $\hbar^2/4$. For excited states $n > 1$, the uncertainty principle also holds.
+\end{tcolorbox}
+
+\begin{section}{Sakurai 1.22}
+\begin{enumerate}
+	\item Prove that $1/\sqrt{2} (1+\sigma_x)$ acting on a two-component spinor can be regarded as the matrix representation of the rotation operator about the x-axis by the angle of $\pi/2$. (The minus sign signifies that the rotation is clockwise)
+
+	\begin{tcolorbox}
+		The form of the rotation operator about the x-axis is:
 		\begin{align*}
-			V = \begin{cases}
-				0 & \text{for $0 < x < a$,} \\
-				\infty & \text{otherwise.}
-			\end{cases}
+			D(\boldsymbol{\hat x}, \phi)
+			 & = \exp(-i \phi \frac{\boldsymbol{\hat x \cdot S}}{\hbar}) \\
+			 & = \exp(-i \phi \frac{S_x}{\hbar})                         \\
+			 & = \exp(-i \phi \frac{\sigma_x}{2})                        \\
+			 & = \begin{pmatrix}
+				     \cos \frac{\phi}{2}    & -i \sin \frac{\phi}{2} \\
+				     -i \sin \frac{\phi}{2} & \cos \frac{\phi}{2}
+			     \end{pmatrix}
+		\end{align*}
+		Which is the same as the matrix representation of $1/\sqrt{2} (1+\sigma_x)$ for $\phi = -\pi/2$, i.e.
+		\begin{align*}
+			\frac{1}{\sqrt{2}} (1+\sigma_x)
+			 & = \frac{1}{\sqrt{2}}
+			\begin{pmatrix}
+				1  & -i \\
+				-i & 1
+			\end{pmatrix}
+			= D(\boldsymbol{\hat x}, -\pi/2)
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Construct the matrix representation of $S_z$ when the eigekets of $S_y$ are used as base vector
+
+	\begin{tcolorbox}
+		The eigenkets of $S_y$ are:
+		\begin{align*}
+			\ket{\psi_{y+}} & = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ i \end{pmatrix}  \\
+			\ket{\psi_{y-}} & = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ -i \end{pmatrix}
+		\end{align*}
+		Therefore to find the matrix representation of $S_z$, we need to find the projection of $S_z$ onto the eigenkets:
+		\begin{align*}
+			\bra{\psi_{y+}}{\sigma_z}\ket{\psi_{y+}} = 0 \\
+			\bra{\psi_{y+}}{\sigma_z}\ket{\psi_{y-}} = 1 \\
+			\bra{\psi_{y-}}{\sigma_z}\ket{\psi_{y+}} = 1 \\
+			\bra{\psi_{y-}}{\sigma_z}\ket{\psi_{y-}} = 0
 		\end{align*}
 
-		Do this for both the ground and excited states.
-		\begin{tcolorbox}[breakable]
-			The wavefunction for the particle can be found by solving the Schrodinger equation:
-			\begin{align*}
-				H \psi(x) &= E_n \psi(x) \\
-				- \frac{\hbar^2}{2m} \frac{d^2}{dx^2} \psi(x) &= E_n \psi(x) 
-			\end{align*}
-			
-			Solving the differential equation and normalizing, we get the wavefunction for $0 < x < a$:
-			\begin{align*}
-				\psi(x) = A \sin \left( k x \right) = \sqrt{\frac{2}{a}} \wf
-			\end{align*}
-			and for $\psi(x) = 0$ for $x > a$:
+		Therefore, the matrix representation of $S_z$ in the basis of $\ket{\psi_{y+}}$ and $\ket{\psi_{y-}}$ is:
+		\begin{align*}
+			\bra{\psi_y}S_z\ket{\psi_y} = \frac{\hbar}{2}
+			\begin{pmatrix}
+				0 & 1 \\
+				1 & 0
+			\end{pmatrix}
+		\end{align*}
 
-			The expectation value of any operator $\hat A$ is given by:
-			\begin{align*}
-				\expc{\hat A} &= \int_0^\infty \psi(x)^* A \psi(x) dx \\
-				&= \int_0^a \frac{2}{a} \wf \hat A \wf dx  
-			\end{align*}
+		Which is the same as $S_x$. This is because we rotate the basis clockwise by $\pi/2$ about the x-axis. This implies under this basis rotation, the old $z$ axis is now the new $x$ axis.
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
 
-			Thus the expectation value of the following operators are:
-			\begin{align*}
-				\expc{x} &= \frac{a}{2} \\
-				\expc{x^2} &= \frac{2a^2}{6} \\
-				\expc{p} &= 0 \\
-				\expc{p^2} &= \frac{-\hbar^2 n^2 \pi^2}{a^2}
-			\end{align*}
+\begin{section}{Sakurai 1.27}
+\begin{enumerate}
+	\item Suppose that $f(A)$ is a function of a Hermitian operator $A$ with the property $A\ket{a'} = a'\ket{a'}$. Evaluate $\bra{b''}{f(A)}\ket{b'}$ when the transformation from the $a'$ basis to the $b'$ basis is known.
 
-			Substituting these values into the uncertainty product, we get:
-			\begin{align*}
-				\expc{(\Delta x)^2} \expc{(\Delta p)^2} &= \left(\expc{x^2} - \expc{x^2}\right) \left(\expc{p^2} - \expc{p}^2\right) \\
-				&= \frac{\hbar}{12} (-6 + n^2 \pi^2) \\
-			\end{align*}
+	\begin{tcolorbox}
+		\begin{align*}
+			\bra{b''}{f(A)}\ket{b'}
+			&= \sum_{a''}\sum_{a'} \bra{b''}\ket{a''} \bra{a''}f(A)\ket{a'} \bra{a'}\ket{b'} \\
+			&= \sum_{a''}\sum_{a'} \bra{b''}\ket{a''} f(a')\delta_{a,a''} \bra{a'}\ket{b'} \\
+			&= \sum_{a'} f(a') \bra{b''}\ket{a'} \bra{a'}\ket{b'} \\
+		\end{align*}
+	\end{tcolorbox}
 
-			For ground state $n=1$, 
-			\begin{align*}
-				\expc{(\Delta x)^2} \expc{(\Delta p)^2} = \frac{\hbar}{12} (-6 + \pi^2) \approx 0.322 \hbar^2
-			\end{align*}
-			which implies that the uncertainty principle holds, i.e. larger than $\hbar^2/4$. For excited states $n > 1$, the uncertainty principle also holds.
-		\end{tcolorbox}
-	\end{section}
+	\item Using the continuum analogue of the result obtained in (a), evaluate
+	\begin{align*}
+		\bra{\boldsymbol{p''}}{F(r)}\ket{\boldsymbol{p'}}
+	\end{align*}
+	Simplify your expression as far as you can. Note that $r$ is $\sqrt{x^2 + y^2 + z^2}$, where $x$, $y$, and $z$ are {\it operators}.
+
+	\begin{tcolorbox}
+		We can start by applying continuum condition:
+		\begin{align*}
+			\bra{\boldsymbol{p''}}{F(r')}\ket{\boldsymbol{p'}}
+			= \int F(r') \bra{\boldsymbol{p''}}\ket{\boldsymbol{x'}} \bra{\boldsymbol{x'}}\ket{\boldsymbol{p'}} d^3r' \\
+			= \frac{1}{(2 \pi \hbar)^3} \int F(r') e^{i (\boldsymbol{p'}-\boldsymbol{p''}) \cdot \boldsymbol{x'}/\hbar} d^3r' \\
+		\end{align*}
+
+		Then, we can use symmetry arguement to simplify the integral. Consider $\boldsymbol q \equiv \boldsymbol{p'} - \boldsymbol{p''}$, and $\boldsymbol{q'} \cdot \boldsymbol{x'} = q'r' \cos \theta$, where $\theta$ is the angle between $\boldsymbol{q}$ and $\boldsymbol{x'}$. Then the integral becomes:
+
+		\begin{align*}
+			\int F(r') e^{i \boldsymbol{q} \cdot \boldsymbol{x'}/\hbar} d^3r' 
+			 &=  2\pi \int_0^\infty dr'F(r') \int_0^\pi e^{i q'r' \cos \theta /\hbar } \sin \theta d \theta \\
+			 &= 2\pi \int_0^\infty dr'F(r') \int_0^\pi e^{i q'r' \cos \theta /\hbar } d \theta \\
+			 &= 2\pi \int_0^\infty dr'F(r') \frac{2\hbar}{q'r'} \sin{(q'r'/\hbar)}
+		\end{align*}
+
+		Thus the final result is:
+		\begin{align*}
+			\bra{\boldsymbol{p''}}{F(r')}\ket{\boldsymbol{p'}}
+			 = \frac{1}{2 \pi^2 \hbar^2} \int dr' F(r') \frac{\sin(q'r'/\hbar)}{q' r'}
+		\end{align*}
+	\end{tcolorbox}
+\end{enumerate}
+
+\end{section}{}
+\end{section}
 \end{document}
