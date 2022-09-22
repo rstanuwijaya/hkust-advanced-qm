@@ -3,7 +3,7 @@
 
 \renewcommand{\sectionPrefix}{Problem }
 
-\title{HW2}
+\title{PHYS 5260 HW2}
 \author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
 \\ (20582731) \\ rstanuwijaya@connect.ust.hk}
 \affil{Department of Physics - HKUST}
@@ -12,6 +12,7 @@
 \begin{document}
 \maketitle
 \newcommand{\expc}[1]{\left<#1\right>}
+
 \begin{section}{Sakurai 1.21}
 \newcommand{\wf}{\sin \left( \frac{n \pi}{a} x \right)}
 Evaluate the $x-p$ uncertainty product $\expc{(\Delta x)^2} \expc{(\Delta p)^2}$ for a one-dimensional particle confined between two rigid walls,
@@ -63,7 +64,9 @@ Do this for both the ground and excited states.
 	\end{align*}
 	which implies that the uncertainty principle holds, i.e. larger than $\hbar^2/4$. For excited states $n > 1$, the uncertainty principle also holds.
 \end{tcolorbox}
+\end{section}
 
+\newpage
 \begin{section}{Sakurai 1.22}
 \begin{enumerate}
 	\item Prove that $1/\sqrt{2} (1+\sigma_x)$ acting on a two-component spinor can be regarded as the matrix representation of the rotation operator about the x-axis by the angle of $\pi/2$. (The minus sign signifies that the rotation is clockwise)
@@ -122,6 +125,7 @@ Do this for both the ground and excited states.
 \end{enumerate}
 \end{section}
 
+\newpage
 \begin{section}{Sakurai 1.27}
 \begin{enumerate}
 	\item Suppose that $f(A)$ is a function of a Hermitian operator $A$ with the property $A\ket{a'} = a'\ket{a'}$. Evaluate $\bra{b''}{f(A)}\ket{b'}$ when the transformation from the $a'$ basis to the $b'$ basis is known.
@@ -129,9 +133,9 @@ Do this for both the ground and excited states.
 	\begin{tcolorbox}
 		\begin{align*}
 			\bra{b''}{f(A)}\ket{b'}
-			&= \sum_{a''}\sum_{a'} \bra{b''}\ket{a''} \bra{a''}f(A)\ket{a'} \bra{a'}\ket{b'} \\
-			&= \sum_{a''}\sum_{a'} \bra{b''}\ket{a''} f(a')\delta_{a,a''} \bra{a'}\ket{b'} \\
-			&= \sum_{a'} f(a') \bra{b''}\ket{a'} \bra{a'}\ket{b'} \\
+			 & = \sum_{a''}\sum_{a'} \bra{b''}\ket{a''} \bra{a''}f(A)\ket{a'} \bra{a'}\ket{b'} \\
+			 & = \sum_{a''}\sum_{a'} \bra{b''}\ket{a''} f(a')\delta_{a,a''} \bra{a'}\ket{b'}   \\
+			 & = \sum_{a'} f(a') \bra{b''}\ket{a'} \bra{a'}\ket{b'}                            \\
 		\end{align*}
 	\end{tcolorbox}
 
@@ -145,27 +149,139 @@ Do this for both the ground and excited states.
 		We can start by applying continuum condition:
 		\begin{align*}
 			\bra{\boldsymbol{p''}}{F(r')}\ket{\boldsymbol{p'}}
-			= \int F(r') \bra{\boldsymbol{p''}}\ket{\boldsymbol{x'}} \bra{\boldsymbol{x'}}\ket{\boldsymbol{p'}} d^3r' \\
+			= \int F(r') \bra{\boldsymbol{p''}}\ket{\boldsymbol{x'}} \bra{\boldsymbol{x'}}\ket{\boldsymbol{p'}} d^3r'         \\
 			= \frac{1}{(2 \pi \hbar)^3} \int F(r') e^{i (\boldsymbol{p'}-\boldsymbol{p''}) \cdot \boldsymbol{x'}/\hbar} d^3r' \\
 		\end{align*}
 
 		Then, we can use symmetry arguement to simplify the integral. Consider $\boldsymbol q \equiv \boldsymbol{p'} - \boldsymbol{p''}$, and $\boldsymbol{q'} \cdot \boldsymbol{x'} = q'r' \cos \theta$, where $\theta$ is the angle between $\boldsymbol{q}$ and $\boldsymbol{x'}$. Then the integral becomes:
 
 		\begin{align*}
-			\int F(r') e^{i \boldsymbol{q} \cdot \boldsymbol{x'}/\hbar} d^3r' 
-			 &=  2\pi \int_0^\infty dr'F(r') \int_0^\pi e^{i q'r' \cos \theta /\hbar } \sin \theta d \theta \\
-			 &= 2\pi \int_0^\infty dr'F(r') \int_0^\pi e^{i q'r' \cos \theta /\hbar } d \theta \\
-			 &= 2\pi \int_0^\infty dr'F(r') \frac{2\hbar}{q'r'} \sin{(q'r'/\hbar)}
+			\int F(r') e^{i \boldsymbol{q} \cdot \boldsymbol{x'}/\hbar} d^3r'
+			 & =  2\pi \int_0^\infty dr'F(r') \int_0^\pi e^{i q'r' \cos \theta /\hbar } \sin \theta d \theta \\
+			 & = 2\pi \int_0^\infty dr'F(r') \int_0^\pi e^{i q'r' \cos \theta /\hbar } d \theta              \\
+			 & = 2\pi \int_0^\infty dr'F(r') \frac{2\hbar}{q'r'} \sin{(q'r'/\hbar)}
 		\end{align*}
 
 		Thus the final result is:
 		\begin{align*}
 			\bra{\boldsymbol{p''}}{F(r')}\ket{\boldsymbol{p'}}
-			 = \frac{1}{2 \pi^2 \hbar^2} \int dr' F(r') \frac{\sin(q'r'/\hbar)}{q' r'}
+			= \frac{1}{2 \pi^2 \hbar^2} \int dr' F(r') \frac{\sin(q'r'/\hbar)}{q' r'}
+		\end{align*}
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 1.30}
+\newcommand{\bp}{\boldsymbol{p}}
+\newcommand{\bl}{\boldsymbol{l}}
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\cT}{\mathcal{T}}
+The translation operator for a finite (spatial) displacement is given by:
+\begin{align*}
+	\cT(\boldsymbol{l}) = \exp\left(\frac{-i \bp \cdot \bl}{\hbar}\right)
+\end{align*}
+where $\bp$ is the momentum operator.
+
+\begin{enumerate}
+	\item Evaluate
+	$$
+		\sbracket{x_i, \cT(\bl)}
+	$$
+
+	\begin{tcolorbox}[breakable]
+		Note that $\cT(\bl)$ is a power series of $\bp$. First, note the following commutator relation:
+		\begin{align*}
+			\sbracket{x, p^n} & = p[x, p^{n-1}] + [x,p] p^{n-1}           \\
+			                  & = p^2 [x, p^{n-2}] + 2[x,p] p^{n-1}       \\
+			                  & = \cdots                                  \\
+			                  & = p^n [x, p^{0}] + n[x,p] p^{n-1}         \\
+			                  & = ni \hbar p^{n-1}                        \\
+			                  & = i \hbar \frac{\partial p^n}{\partial p}
+		\end{align*}
+
+		Thus for a power series $\cT$, the commutation relation is:
+		\begin{align*}
+			[x_i, \cT(\bl)] & = i \hbar \frac{\partial}{\partial p_i} \exp \left( \frac{-i \bp \cdot \bl}{\hbar} \right) \\
+			                & = l_i \exp \left( \frac{-i \bp \cdot \bl}{\hbar} \right)                                   \\
+			                & = l_i \cT(\bl)
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Using (a) (or otherwise), demonstrate how the expectation value of $\expc{\bx}$ changes under translation:
+
+	\begin{tcolorbox}
+		Using Heisenberg picture, the operator $x_i$ changes to $x_i' = \cT(\bl)^\dagger x_i' \cT(\bl)$ under translation. The expectation value is given by:
+
+		\begin{align*}
+			\expc{x_i'} & = \bra{\alpha}x_i'\ket{\alpha}                                \\
+			            & = \bra{\alpha}\cT(\bl)^\dagger x_i' \cT(\bl) \ket{\alpha}     \\
+			            & = \bra{\alpha} \cT(\bl)^\dagger [x,\cT(\bl)] + x \ket{\alpha} \\
+			            & = l_i + \expc{x_i}                                            \\
 		\end{align*}
 	\end{tcolorbox}
 \end{enumerate}
 
-\end{section}{}
+\newpage
+\begin{section}{Sakurai 1.33}
+\begin{enumerate}
+	\item Prove the following:
+	\begin{enumerate}
+		\item $\bra{p'} x \ket{\alpha} = i \hbar \frac{\partial}{\partial p'} \bra{p'}\ket{\alpha}$
+		\item $\bra{\beta}{x}\ket{\alpha} = \int dp' \varphi_\beta^*(p') i\hbar \frac{\partial}{\partial p'} \varphi_\alpha(p')$
+	\end{enumerate}
+
+	where $\varphi_{\alpha}(p') = \bra{p'}\ket{\alpha}$ and $\varphi_\beta(p') = \bra{p'}\ket{\beta}$ are momentum space wavefunction.
+
+	\begin{tcolorbox}[breakable]
+		First, lets find the projection of $x\ket{p}$ onto the different momentum space:
+		\begin{align*}
+			\bra{p'}x\ket{p''} & = \int \bra{p'}x\ket{x'} \bra{x'}\ket{p''} dx'                                                                         \\
+			                   & = \int x' \bra{p'}\ket{x'} \bra{x'}\ket{p''} dx'                                                                       \\
+			                   & = \int x' \frac{1}{2\pi\hbar} \exp \left(-i\frac{(p' -p'')\cdot x}{\hbar}\right) dx'                                   \\
+			                   & = \frac{1}{2\pi\hbar} i\hbar \frac{\partial}{\partial p'} \int \exp \left(-i\frac{(p' -p'')\cdot x'}{\hbar}\right) dx' \\
+			                   & = i\hbar \frac{\partial}{\partial p'} \delta(p' -p'')
+		\end{align*}
+
+		Then we can expand the operator $x$
+		\begin{align*}
+			x & = \iint dp' dp'' \ket{p'} \bra{p'}x\ket{p''} \bra{p''}               \\
+			  & = i\hbar \int dp'' \ket{p''} \frac{\partial}{\partial p''} \bra{p''} \\
+		\end{align*}
+
+		Then:
+		\begin{align*}
+			\bra{p'} x \ket{\alpha} & = \int dp'' \bra{p'}\ket{p''} \frac{\partial}{\partial p''} \bra{p''}\ket{\alpha} \\
+			                        & = \frac{\partial}{\partial p'} \bra{p'}{\alpha}
+		\end{align*}
+
+		Similarly:
+		\begin{align*}
+			\bra{\beta}{x}\ket{\alpha} & = \int dp' \bra{\beta}\ket{p'} \frac{\partial}{\partial p'} \bra{p'}\ket{\alpha}      \\
+			                           & = \int dp' \varphi_\beta^*(p') i\hbar \frac{\partial}{\partial p'} \varphi_\alpha(p')
+		\end{align*}
+	\end{tcolorbox}
+
+	\newpage
+	\item What is the signifiance of
+	$$
+		\exp \left( \frac{i x \; \Theta}{\hbar} \right)
+	$$
+	where $x$ is the position operator and $\Theta$ is some number with the dimension of momentum? Justify your answer.
+
+	\begin{tcolorbox}
+		This is the momentum translation operator. Similar to the position translation operator, we can define a momentum translation operator $T(dp)$:
+		\begin{align*}
+			T(dp) = \left( 1 - \frac{x \; dp}{\hbar} \right)
+		\end{align*}
+
+		Over a finite distance in the momentum space, the momentum translation operator is given by:
+		\begin{align*}
+			T(dp) & = \lim_{N \to \infty} \left( 1 - \frac{x \; \Theta}{N\hbar} \right)^N \\
+			      & = \exp \left( \frac{i x \; \Theta}{\hbar} \right)
+		\end{align*}
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
 \end{section}
 \end{document}
