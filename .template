@@ -3,7 +3,7 @@
 
 \renewcommand{\sectionPrefix}{Problem }
 
-\title{TITLE_PLACEHOLDER}
+\title{PHYS 5260 TITLE_PLACEHOLDER}
 \author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
 \\ (20582731) \\ rstanuwijaya@connect.ust.hk}
 \affil{Department of Physics - HKUST}

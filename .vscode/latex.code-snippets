@@ -13,7 +13,7 @@
 	// 	"description": "Log output to console"
 	// }
 	"Document boilerplate": {
-		"prefix": "\\article",
+		"prefix": "@article",
 		"body": [
 			"\\documentclass{article}",
 			"\\usepackage[utf8]{inputenc}",

@@ -14,5 +14,6 @@
         "%DIR%/",
         "%TMPFILE%",
         "-l=%WORKSPACE_FOLDER%/.latexindent.yaml"
-    ]
+    ],
+    "editor.suggest.snippetsPreventQuickSuggestions": false
 }

@@ -1,0 +1,435 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+\renewcommand{\sectionPrefix}{Problem }
+
+\title{PHYS 5260 HW3}
+\author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
+\\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\expc}[1]{\left<#1\right>}
+
+\begin{document}
+
+\maketitle
+\begin{section}{Sakurai 2.3}
+\newcommand{\sdotn}{\boldsymbol{S \cdot \hat{n}}}
+\newcommand{\sdotnplus}{\ket{\sdotn; +}}
+
+An electron is subject to a uniform, time-independent magnetic field of strength $B$ in the positive z-direction. At $t= 0$ the electron is known to be in an eigenstate of $\bs{S \cdot \hat{n}}$ with eigenvalue $\hbar /2 $, where $\bs{\hat n}$ is a unit vector, lying in the $xz$-plane, that makes an angle $\beta$ with the $z$-axis.
+
+\begin{enumerate}
+	\item Obtain the probability for finding the electron in the $s_x = \hbar/2$ state as a function of time.
+
+	\begin{tcolorbox}[breakable]
+		Similar to Problem 1.9, let the vector $n$ and the spin operator $S$ be given by:
+		\begin{align*}
+			\boldsymbol{\hat{n}} & = \cos{\alpha}\sin{\beta} \boldsymbol{\hat{x}} + \sin{\alpha}\sin{\beta} \boldsymbol{\hat{y}} + \cos{\beta} \boldsymbol{\hat{z}} \\
+			\boldsymbol{S}       & = \frac{\hbar}{2} \pbracket{\sigma_x \boldsymbol{\hat{x}} + \sigma_y \boldsymbol{\hat{y}} + \sigma_z \boldsymbol{\hat{z}}}
+		\end{align*}
+
+		The inner product is thus given by:
+		\begin{align*}
+			\sdotn & = \frac{\hbar}{2}
+			\left(
+			\begin{array}{cc}
+					\cos (\beta )                                               & \cos (\alpha ) \sin (\beta )-i \sin (\alpha ) \sin (\beta ) \\
+					\cos (\alpha ) \sin (\beta )+i \sin (\alpha ) \sin (\beta ) & -\cos (\beta )                                              \\
+				\end{array}
+			\right)                    \\
+			       & = \frac{\hbar}{2}
+			\left(
+			\begin{array}{cc}
+					\cos (\beta )              & e^{-i \alpha} \sin (\beta ) \\
+					e^{i \alpha} \sin (\beta ) & -\cos (\beta )              \\
+				\end{array}
+			\right)
+		\end{align*}
+
+		Solving the eigenvalue problem for $\sdotn$, we obtain the condition:
+		\begin{align*}
+			|\sdotn - Iv| = 0 \iff v = \pm \frac{\hbar}{2}
+		\end{align*}
+
+		To find the corresponding eigenvectors for the eigenvalue $+1$, we solve the following equation:
+		\begin{align*}
+			\frac{\hbar}{2}
+			\left(
+			\begin{array}{cc}
+					\cos (\beta )              & e^{-i \alpha} \sin (\beta ) \\
+					e^{i \alpha} \sin (\beta ) & -\cos (\beta )              \\
+				\end{array}
+			\right)
+			\begin{pmatrix}
+				x \\
+				y
+			\end{pmatrix}
+			= \frac{\hbar}{2}
+			\begin{pmatrix}
+				x \\
+				y
+			\end{pmatrix}
+		\end{align*}
+
+		We obtain the solution:
+		\begin{align*}
+			x (\cos{\beta} -1) + y e^{-i \alpha} \sin{\beta}    & = 0 \\
+			x e^{i \alpha} \sin{\beta / 2}  + y \cos{\beta / 2} & = 0
+		\end{align*}
+
+		Therefore:
+		\begin{align*}
+			\sdotnplus        & = \cos{\beta / 2} \ket{+} + e^{-i \alpha} \sin{\beta / 2} \ket{-}                             \\
+			\ket{\alpha; t=0} & = \cos{\beta / 2} \ket{+} + \sin{\beta / 2} \ket{-}               & \text{since $\alpha = 0$}
+		\end{align*}
+
+		The Hamiltonian of our system is given by:
+		\begin{align*}
+			\hat{H} & = \hat{T} + \hat{V} = \hat{V} = - \bs{\mu \cdot B} \\
+			        & = \frac{g_e e}{2m} \bs{S \cdot B}                  \\
+			        & \approx \frac{\hbar}{2} \frac{eB}{m} \sigma_z
+		\end{align*}
+
+		Thus the time evolution operator is given by:
+		\begin{align*}
+			U(t) & = \exp \left(-i \hat{H} t / \hbar \right)  = \exp \left(-\frac{i}{2} \frac{eB}{m} \sigma_z t \right) \\
+			     & = \begin{pmatrix}
+				         e^{-i \omega/2 t} & 0                \\
+				         0                 & e^{i \omega/2 t}
+			         \end{pmatrix}
+		\end{align*}
+		where $\omega = eB/m$
+
+		Therefore the state at time $t$ is given by:
+		\begin{align*}
+			\ket{\alpha; t=t} & = U(t) \ket{\alpha; t=0}                                                               \\
+			                  & = e^{-i \omega/2 t} \cos{\beta / 2} \ket{+} + e^{i \omega/2 t} \sin{\beta / 2} \ket{-}
+		\end{align*}
+
+		And the state for the $s_x = \hbar/2$ state is given by:
+		\begin{align*}
+			\ket{Sx; +} = \frac{1}{\sqrt{2}} \left( \ket{+} + \ket{-} \right)
+		\end{align*}
+
+		Therefore, the probability of finding the electron in the $s_x = \hbar/2$ state is given by at a given time $t$ is given by:
+		\begin{align*}
+			\abs{\bra{Sx; +} \ket{\alpha; t=t}}^2
+			 & = \frac{1}{2} \left( \abs{\bra{+} \ket{\alpha; t=t} + \bra{-} \ket{\alpha; t=t}}^2 \right)                 \\
+			 & = \frac{1}{2} \left( \abs{ e^{-i \omega/2 t} \cos{\beta / 2} + e^{i \omega/2 t} \sin{\beta / 2}}^2 \right) \\
+			 & = \frac{1}{2} \left( \cos^2{\beta/2} + \sin^2{\beta/2} + \cos{\omega t} \sin{beta} \right)                 \\
+			 & = \frac{1 + \cos{\omega t} \sin{\beta} }{2}
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Find the expectation value of $S_x$ as a function of time
+
+	\begin{tcolorbox}
+		Therefore, the expectation value $\expc{S_x (t)}$ is given by:
+		\begin{align*}
+			\bra{\alpha; t=t} S_x \ket{\alpha; t=t}
+			 & = \frac{\hbar}{2} \bra{\alpha; t=t} \sigma_x \ket{\alpha; t=t}                   \\
+			 & = \frac{\hbar}{2} (e^{i \omega t} + e^{-i \omega t}) \cos{\beta/2} \sin{\beta/2} \\
+			 & = \frac{\hbar}{2} \cos{\omega t} \sin{\beta}
+		\end{align*}
+	\end{tcolorbox}
+
+	\item For your own peace of mind, show that your answers make good sense in the extreme cases (i) $\beta \to 0$ (ii) $\beta \to \pi/2$
+
+	\begin{tcolorbox}
+		For $\beta \to 0$, $\expc{S_x (t)} = 0$. This is what we are expected since there is no precession, and the electron is always in the $s_z = \hbar/2$ state.
+
+		For $\beta \to \pi/2$, $\expc{S_x (t)} = \frac{\hbar}{2} \cos{\omega t}$, which is similar to classical precession.
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.6}
+Consider a particle in one dimension whose Hamiltonial is given by:
+$$
+	H = \frac{p^2}{2m} + V(x)
+$$
+
+By calculating $[[H, x], x]$, prove:
+$$
+	\sum_{a'} \abs{\bra{a''} x \ket{a'}}^2 (E_{a'} - E_{a''}) = \frac{\hbar^2}{2m}
+$$
+where $\ket{a'}$ is an energy eigenket with eigenvalue $E_{a'}$
+
+\begin{tcolorbox}[breakable]
+	First, we calculate the following commutators:
+	\begin{align*}
+		[H,x]     & = \frac{1}{2m} [p^2, x] = \frac{1}{2m} (p[p, x] + [p, x] p)       \\
+		          & = \frac{1}{2m} (p (-i\hbar) + (-i \hbar) p) = \frac{-i\hbar p}{m} \\
+		\\
+		[[H,x],x] & = \frac{-i \hbar}{m} [p, x] = \frac{-i \hbar}{m} (-i \hbar)       \\
+		          & = -\frac{\hbar^2}{m}
+	\end{align*}
+
+	On the other hand, we can expand the commutator relation to be:
+	\begin{align*}
+		[[H,x], x] & = [H,x] x - x [H ,x]       \\
+		           & = Hx^2 - xHx - xHx + x^2 H \\
+		           & = H x^2 + x^2 H - 2xHx     \\
+	\end{align*}
+
+	The expectation value of the above expression is given by:
+	\begin{align*}
+		\bra{a'} (H x^2 + x^2 H - 2xHx) \ket{a'}
+		                   & = 2E' \bra{a'} x^2 \ket{a'} +- 2 \bra{a'} x  H  x \ket{a'}                                                 \\
+		                   & = \sum_{a''} 2E' \bra{a'} x \ket{a''} \bra{a''} x \ket{a'} - 2 \bra{a'} x \ket{a''} \bra{a''} H x \ket{a'} \\
+		-\frac{\hbar^2}{m} & = 2 \sum_{a''} (E' - E'')  \abs{\bra{a''} x \ket{a'}}^2
+	\end{align*}
+
+	Without loss of generality, we can change the sum basis from $a''$ to $a'$, and we can obtain:
+	\begin{align*}
+		\sum_{a''} (E' - E'')  \abs{\bra{a''} x \ket{a'}}^2 & = -\frac{\hbar^2}{2m}     \\
+		\sum_{a'} (E'' - E')  \abs{\bra{a''} x \ket{a'}}^2  & = -\frac{\hbar^2}{2m}     \\
+		\sum_{a'} (E' - E'')  \abs{\bra{a''} x \ket{a'}}^2  & = \frac{\hbar^2}{2m} \qed
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.9}
+Let $\ket{a'}$ and $\ket{a''}$ be eigenstates of a Hermition operator $A$ with eigenvalues $a'$ and $a''$ respectively ($a' \neq a''$). The Hamiltonian operator is given by:
+$$
+	H = \ket{a'} \delta \bra{a'} + \ket{a''} \delta  \bra{a''}
+$$
+where $\delta$ is just a real number.
+\begin{enumerate}
+	\item Clearly, $\ket{a'}$ and $\ket{a''}$ are not eigenstates of the Hamiltonian. Write down the eigenstates of the Hamiltonian. What are their energy eigenvalues?
+
+	\begin{tcolorbox}
+		First, we can construct the Hamiltonian for $\ket{a'}$, $\ket{a''}$ basis, which is:
+		\begin{align*}
+			H = \begin{pmatrix}
+				    \bra{a'}H\ket{a'}  & \bra{a''}H\ket{a'}  \\
+				    \bra{a'}H\ket{a''} & \bra{a''}H\ket{a''}
+			    \end{pmatrix}
+			= \begin{pmatrix}
+				  0      & \delta \\
+				  \delta & 0
+			  \end{pmatrix}
+		\end{align*}
+
+		The eigenstates and the corresponding eigenvalues for this Hamiltonian are:
+		\begin{align*}
+			\ket{\alpha_+} & = \frac{1}{\sqrt{2}} (\ket{a'} + \ket{a''}) & E_+ & = \delta  \\
+			\ket{\alpha_-} & = \frac{1}{\sqrt{2}} (\ket{a'} - \ket{a''}) & E_- & = -\delta
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Suppose the system is known to e in state $\ket{a'}$ at $t=0$. Write down the state vector in the Schroedinger picture for $t > 0$.
+
+	\begin{tcolorbox}
+		Recall the unitary time evolution operator:
+		\begin{align*}
+			U(t) & = e^{-i H t / \hbar}                                \\
+			     & = \begin{pmatrix}
+				         \cos{\delta t/\hbar}    & -i \sin{\delta t/\hbar} \\
+				         -i \sin{\delta t/\hbar} & \cos{\delta t/\hbar}
+			         \end{pmatrix}
+		\end{align*}
+
+		Therefore, for the given initial state $\ket{a', t=0} = \begin{pmatrix}
+				1 \\ 0
+			\end{pmatrix}$, the state vector in the Schroedinger picture for $t > 0$ is:
+		\begin{align*}
+			\ket{a', t} & = U(t) \ket{a', t=0}                                \\
+			            & = \begin{pmatrix}
+				                \cos{\delta t/\hbar}    & -i \sin{\delta t/\hbar} \\
+				                -i \sin{\delta t/\hbar} & \cos{\delta t/\hbar}
+			                \end{pmatrix}
+			\begin{pmatrix}
+				1 \\ 0
+			\end{pmatrix}                                                    \\
+			            & = \begin{pmatrix}
+				                \cos{\delta t/\hbar} \\ -i \sin{\delta t/\hbar}
+			                \end{pmatrix}
+		\end{align*}
+
+		In the energy eigenstates basis, we have:
+		\begin{align*}
+			\sum_{\pm} \ket{\alpha_{\pm}} \bra{\alpha_{\pm}}\ket{a', t}
+			 & = \frac{1}{\sqrt 2} \begin{pmatrix}
+				                       \cos \delta t/\hbar - i \sin \delta t/\hbar \\
+				                       \cos \delta t/\hbar + i \sin \delta t/\hbar
+			                       \end{pmatrix} \\
+			\ket{\alpha', t}
+			 & = \frac{1}{\sqrt 2} \begin{pmatrix}
+				                       e^{-\delta t/\hbar} \\
+				                       e^{\delta t/\hbar}
+			                       \end{pmatrix}
+		\end{align*}
+	\end{tcolorbox}
+
+	\item What is the probability for finding the system in $\ket{a''}$ for $t > 0$? if the system is known to be in state $\ket{a'}$ at $t=0$?
+
+	\begin{tcolorbox}
+		The probability for finding the system in $\ket{a''}$ for $t > 0$ is:
+		\begin{align*}
+			\abs{\bra{a''}\ket{a', t}}^2 & = \abs{-i \sin \delta t/\hbar}^2 = \sin^2 \delta t/\hbar
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Can you think of a physical situation corresponding to this problem?
+	\begin{tcolorbox}
+		Spin 1/2 particle, i.e, electron.
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.12}
+Consider a particle subject to a one-dimensional simple harmonic oscillator potential. Suppose that at $t=0$ the state vector is given by:
+$$
+	\exp \left( \frac{-ipa}{\hbar} \right) \ket{0}
+$$
+where $p$ is the momentum operator and $a$ is some number with dimension of length. Using the Heisenberg picture, evaluate the expectation value $\expc{x}$ for $t \geq 0$
+
+\begin{tcolorbox}
+	In the Heisenberg picture, the time evolution of the operator is given by:
+	\begin{align*}
+		\frac{dx}{dt}
+		 & = \frac{1}{i\hbar}[x, H] = \frac{1}{i\hbar} [x, p^2/2m + m\omega^2x^2/2]               \\
+		 & = \frac{1}{2mi\hbar} (p[x,p] + [x,p]p) = \frac{1}{2mi\hbar} 2i\hbar p                  \\
+		 & = \frac{p}{m}                                                                          \\
+		\frac{dp}{dt}
+		 & = \frac{1}{i\hbar}[p, H] = \frac{1}{i\hbar} [p, p^2/2m + m\omega^2x^2/2]               \\
+		 & = \frac{m\omega^2}{2i\hbar} (x[p,x] + [p,x]x) = \frac{m\omega^2}{2i\hbar} (-2i\hbar x) \\
+		 & = -m\omega^2x
+	\end{align*}
+
+	Solving the above differential equations with the initial condition $x(0)$, we have:
+	\begin{align*}
+		x(t) & = x(0) \cos (\omega t) + \frac{p(0)}{m \omega} \sin (\omega t)          \\
+		p(t) & = p(0) \cos (\omega t) + \frac{m \omega^2 x(0)}{\omega} \sin (\omega t)
+	\end{align*}
+
+	Then, the expectation value for the posision is:
+	\begin{align*}
+		\expc{x}
+		 & = \bra{0} \exp \left( \frac{ipa}{\hbar} \right) x \exp \left( \frac{-ipa}{\hbar} \right) \ket{0}                               \\
+		 & = \cos (\omega t)\bra{0} \exp \left( \frac{ipa}{\hbar} \right) x(0) \exp \left( \frac{-ipa}{\hbar} \right) \ket{0}  +
+		\frac{\sin(\omega t)}{m \omega} \bra{0} \exp \left( \frac{ipa}{\hbar} \right) p(0) \exp \left( \frac{-ipa}{\hbar} \right) \ket{0} \\
+		 & = \bra{0} (x(0)+a) \ket{0} \cos (\omega t) + \bra{0} p(0) \ket{0} \sin (\omega t)                                              \\
+	\end{align*}
+
+	If we define the ground state as: $\bra{0}x\ket{0} = 0$ and $\bra{0}p\ket{0} = 0$, then:
+	\begin{align*}
+		\expc{x}
+		 & = \bra{0} (x(0)+a) \ket{0} \cos (\omega t) + \bra{0} p(0) \ket{0} \sin (\omega t) \\
+		 & = a \cos (\omega t)
+	\end{align*}
+
+	Which is similar to the classical simple harmonic oscillator with the initial displacement $x(0) = a$.
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.15}
+\begin{enumerate}
+	\item Using
+	$$
+		\bra{x'}\ket{p'} = (2\pi\hbar)^{-1/2} \exp \left( \frac{i p' x'}{\hbar} \right)
+	$$
+	prove:
+	$$
+		\bra{p'}x\ket{\alpha} = i \hbar \frac{\partial}{\partial p'} \bra{p'}\ket{\alpha}
+	$$
+
+	\begin{tcolorbox}
+		First note that we can represent the position operator as:
+		\begin{align*}
+			x = \int dx'' \ket{x''} x'' \bra{x''} = i \hbar \int dp'' \ket{p''} \frac{\partial}{\partial p''} \bra{p''}
+		\end{align*}
+		Then,
+		\begin{align*}
+			\bra{p'}x\ket{\alpha}  = i \hbar \int dp'' \bra{p'}\ket{p''} \frac{\partial}{\partial p''} \bra{p''} \ket{\alpha} = i \hbar \frac{\partial}{\partial p'} \bra{p'}\ket{\alpha} \qed
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Consider a one-dimensional simple harmonic oscillator. Starting with the Schrodinger equation for the state vector, derive the Schrodinger equation for the \textit{momentum-space} wave function. (Make sure to distinguish the operator $p$ from the eigenvalue $p'$.) Can you guess the energy eigenfunction in momentum space?
+
+	\begin{tcolorbox}
+		Recall the hamiltonial for the simple harmonic oscillator:
+		\begin{align*}
+			H = \frac{p^2}{2m} + \frac{m\omega^2 x^2}{2}
+		\end{align*}
+
+		We can write the Schrodinger equation for the momentum space vector as:
+		\begin{align*}
+			\bra{p'}H\ket{\alpha}                                                                                   & = E \bra{p'}\ket{\alpha} \\
+			\frac{1}{2m} \bra{p'}p^2\ket{\alpha} + \frac{1}{2} m\omega^2 \bra{p'}x^2\ket{\alpha}                    & = E \; \phi(p')          \\
+			\left( \frac{1}{2m} p'^2 - \frac{m\omega^2\hbar^2}{2} \frac{\partial^2}{\partial p'^2} \right) \phi(p') & = E \; \phi(p')          \\
+		\end{align*}
+
+		The energy eigenfunction must be of the similar form with the one derived using the ladder operator method. i.e.:
+		\begin{align*}
+			E_n = \hbar \omega (n+1/2)
+		\end{align*}
+		And the corresponding eigenfunction must be of the form of the Hermite polynomial with some normalization constant.
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.18}
+Show that for the one-dimensional simple harmonic osciallator,
+$$
+	\bra{0}e^{ikx}\ket{0} = \exp \left[ -k^2 \bra{0}x^2\ket{0}/2 \right]
+$$
+where $x$ is the position operator
+
+\begin{tcolorbox}[breakable]
+	We can directly calculate the right hand side:
+	\begin{align*}
+		x^2
+		 & = \frac{\hbar}{2m\omega} (a^\dagger a^\dagger + a^\dagger a + a a^\dagger + a a) \\
+		x^2 \ket{0}
+		 & = \frac{\hbar}{2m\omega} (\sqrt{2} \ket{2} + \ket{0})                            \\
+		\bra{0} x^2 \ket{0}
+		 & = \frac{\hbar}{2m\omega}                                                         \\
+		\exp \left( -\frac{k^2}{2} \bra{0} x^2 \ket{0} \right)
+		 & = \exp \left( -\frac{k^2\hbar}{4m\omega} \right) = \exp \frac{-\beta^2}{2}       \\
+		 & = \sum_{n=0}^\infty \frac{(-1)^n \beta^{2n}}{n!} \frac{1}{2^n}
+	\end{align*}
+	where $\beta = k \sqrt{\frac{\hbar}{2m\omega}}$.
+
+	Then we can also write the left hand side as:
+	\begin{align*}
+		\exp (i k x) & = \exp (i\beta (a^\dagger + a))                             \\
+		             & = \sum_{m=0}^\infty \frac{(i\beta)^m}{m!} (a^\dagger + a)^m
+	\end{align*}
+
+	Note that when we take the expectation with $\ket{0}$, the nonzero term are $m=2n$:
+	\begin{align*}
+		\bra{0} \exp (i k x) \ket{0} & = \sum_{n=0}^\infty \frac{(-1)^n \beta^{2n}}{n!} \frac{n!}{(2n)!} \bra{0} (a^\dagger + a)^{2n} \ket{0} 
+	\end{align*}
+
+	We can try the first few terms:
+	\begin{align*}
+		n=1 & \to \frac{1!}{2!} \bra{0} (a^\dagger + a)^{2} \ket{0}                              & = \frac{1}{2^1} \\
+		n=2 & \to \frac{2!}{4!} \bra{0} (a^\dagger + a)^{4} \ket{0}                                                \\
+		    & = \frac{1}{12} \bra{0} (a a a^\dagger a^\dagger + a a^\dagger a a^\dagger + \dots)                   \\
+		    & = \frac{1}{12} (2 + 1)
+		    & = \frac{1}{2^2}                                                                                      \\
+		n=3 & \to \frac{3!}{6!} \bra{0} (a^\dagger + a)^{6} \ket{0}                                                \\
+		    & = \frac{1}{12} \bra{0} (
+		a a a a^\dagger a^\dagger a^\dagger +
+		a a a^\dagger a a^\dagger a^\dagger +
+		a a^\dagger a a a^\dagger a^\dagger +
+		a a a^\dagger a^\dagger a a^\dagger +
+		a a^\dagger a a^\dagger a a^\dagger + \dots ) \ket{0}                                                      \\
+		    & = \frac{1}{120} (6 + 4 + 2 + 2 + 1)
+		    & = \frac{1}{2^3}
+	\end{align*}
+
+	For higher $n$, we can also prove that the two sides are equal.
+\end{tcolorbox}
+\end{section}
+\end{document}
