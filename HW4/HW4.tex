@@ -1,0 +1,251 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+\renewcommand{\sectionPrefix}{Problem }
+
+\title{PHYS 5260 HW4}
+\author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
+\\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\expc}[1]{\left<#1\right>}
+
+\begin{document}
+\maketitle
+\begin{section}{Sakurai 2.21}
+Derive the normalization constant $c_n$ by deriving the orthogonality relatioonship using generating functions. Start by working out the integral
+$$
+	I = \int_{-\infty}^\infty g(x,t) g(x,s) e^{-x^2} dx
+$$
+and then consider the integral again with the generating functions in terms of series with Hermite polynomials.
+
+\begin{tcolorbox}[breakable]
+	Using the definition of generating function in (2.5.17a), $g(x,t)$ is given by:
+	\begin{align*}
+		g(x,t) = e^{-t^2+2tx}
+	\end{align*}
+	Substituting the generating function, the given integral yields:
+	\begin{align*}
+		\int_{-\infty}^\infty g(x,t) g(x,s) e^{-x^2} dx
+		 & = \int_{-\infty}^\infty e^{-t^2+2tx} e^{-s^2+2sx} e^{-x^2} dx \\
+		 & = e^{2ts} \int_{-\infty}^\infty e^{-(x-(t+s))^2} dx           \\
+		 & = e^{2ts} \sqrt{\pi}                                          \\
+		 & = \sqrt{\pi} \sum_{n=0}^\infty \frac{2^nt^ns^n}{n!} \tagthis
+	\end{align*}
+	The second equation holds since $-t^2+2tx -s^2 +2sx -x^2 = -(x^2 - 2(t+s) + (t+s)^2) + 2ts$.
+
+	On the other hand, using the definition of generating function in (2.5.17b), $g(x,t)$ is given by:
+	\begin{align*}
+		g(x,t) = \sum_{n=0}^\infty H_n(x) \frac{t^n}{n!}
+	\end{align*}
+	Substituting the generating function, the given integral yields:
+	\begin{align*}
+		\int_{-\infty}^\infty g(x,t) g(x,s) e^{-x^2} dx
+		 & = \sum_{n=0}^\infty \sum_{m=0}^\infty \frac{t^n}{n!} \frac{s^m}{m!} \int_{-\infty}^\infty H_n(x) H_m(x) e^{-x^2} dx \tagthis
+	\end{align*}
+
+	Comparing the two results for $m = n$, we have:
+	\begin{align*}
+		\frac{t^n s^n}{(n!)^2} \int_{-\infty}^\infty H_n(x) H_n(x) e^{-x^2} dx & =  2^n \sqrt{\pi} \frac{t^n s^n}{n!} \\
+		\int_{-\infty}^\infty H_n(x) H_n(x) e^{-x^2} dx                        & = 2^n \sqrt{\pi} n!
+	\end{align*}
+	On the other hand, for $m \neq n$, the integral must be 0, i.e.:
+	\begin{align*}
+		\int_{-\infty}^\infty H_n(x) H_m(x) e^{-x^2} dx & = 0
+	\end{align*}
+
+	Recalling the definition of the wave function:
+	\begin{align*}
+		u_n(x) = c_n H_n \left(x \sqrt{\frac{m \omega}{\hbar}}\right) e^{-m\omega x^2/2\hbar}
+	\end{align*}
+
+	We can now write the normalization condition as:
+	\begin{align*}
+		\int_{-\infty}^\infty u_n^*(x) u_n(x) dx &= |c_n|^2 \int_{-\infty}^\infty  H_n^2 \left(x \sqrt{\frac{m \omega}{\hbar}}\right)  e^{-m\omega x^2/\hbar} dx \\
+		&= |c_n|^2 2^n \sqrt{\pi} n! = 1
+	\end{align*}
+
+	Which yields:
+	\begin{align*}
+		c_n = \left( \frac{m\omega}{2^{2n} \pi (n!)^2 \hbar} \right)^{1/4}
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.24}
+Consider a particle in one dimension bound to a fixed centre by a $\delta$-function potential of the form
+$$
+	V(x) = -v_0 \delta(x), \; \text{($v_0$ real and positive)}
+$$
+Find the wave function and the binding energy of the ground state. Are there excited bound states?
+
+\begin{tcolorbox}[breakable]
+	The Schrodinger equation for the system is given by:
+	\begin{align*}
+		\left( -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} - v_0 \delta(x) \right) \psi(x) & = E \psi(x)
+	\end{align*}
+
+	For bound states, we apply $E = -E_0 < 0$, i.e. the wave function decays exponentially. The wave function can be written as:
+	\begin{align*}
+		\psi(x) & = C e^{-\kappa |x|}      \\
+		        & = \begin{cases}
+			            C e^{-\kappa x}, & x<0 \\
+			            C e^{\kappa x},  & x>0
+		            \end{cases}
+	\end{align*}
+	where $\kappa = ik = i\sqrt{2mE_0}/\hbar$.
+
+	The second boundary coindition usually can be obtained by matching the derivative of the wave function at $x=0$. However, since there is a delta potential at the origin we cannot use this method. Instead, we integrate over a small distance $\epsilon$ from the origin and match the wave function:
+	\begin{align*}
+		\frac{-\hbar^2}{2m} \int_{-\epsilon}^{\epsilon} \psi''(x) dx - v_0 \int_{-\epsilon}^{\epsilon} \delta(x) \psi(x) dx
+		 & = E \int_{-\epsilon}^{\epsilon} \psi(x) dx \\
+		\frac{-\hbar^2}{2m} (\psi'(\epsilon)-\psi'(-\epsilon)) - v_0 \psi(0)
+		 & = E (\psi(\epsilon)-\psi(-\epsilon))
+	\end{align*}
+
+	Taking limit $\epsilon \to 0$ on both sides, we get:
+	\begin{align*}
+		\frac{-\hbar^2}{2m} (-2\kappa) C - v_0 C & = 0 \iff \kappa = m v_0/\hbar^2
+	\end{align*}
+
+	If we solve the Schrodinger equation for any $x>0$ or $x<0$, we obtain the solution:
+	\begin{align*}
+		\frac{-\hbar^2}{2m} \frac{\partial^2 \psi(x)}{\partial x^2} = -E_0 \psi(x) \iff \psi(x) = C e^{-\sqrt{2mE_0/\hbar^2} |x|}
+	\end{align*}
+
+	Thus, matching the two solutions, we can obtain:
+	\begin{align*}
+		\frac{m v_0}{\hbar^2} = \frac{\sqrt{2mE_0}}{\hbar} \iff E_0 = \frac{m v_0^2}{2\hbar^2}
+	\end{align*}
+
+	Since this energy is unique, there is no excited state of this system.
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.27}
+Derive an expression for the density of free-particle states in two dimensions, normalized with periodic boundary conditions inside a box of side length $L$. Your answer should be written as a function of $k$ (or $E$) times $dE d\phi$, where $\phi$ is the polar angle that characterizes the momentum direction in two dimensions.
+
+\begin{tcolorbox}[breakable]
+	The wave function for a free particle in two dimensions is given by:
+	\begin{align*}
+		\psi(x,y) & = \frac{1}{\sqrt{L^2}} e^{i(k_x x + k_y y)}
+	\end{align*}
+
+	Where $k_x = \frac{2\pi}{L} n_x$ and $k_y = \frac{2\pi}{L} n_y$.
+
+	The energy of the particle is given by:
+	\begin{align*}
+		E = \frac{p^2}{2m} = \frac{\hbar^2}{2m} (k_x^2 + k_y^2) = \frac{2\pi^2 \hbar^2}{m L^2} (n_x^2 + n_y^2)
+	\end{align*}
+
+	Assume we do a transformation from a cartesian coordinate spanned by $n_x, n_y$ to a polar coordinate spanned by $n, \phi$, then the following relation holds:
+	\begin{align*}
+		n^2            & = n_x^2 + n_y^2   \\
+		\tan \phi      & = \frac{n_y}{n_x} \\
+		dN = dn_x dn_y & = n dn d\phi
+	\end{align*}
+	where $dN$ is the density of states.
+
+	The energy relation can be rewritten in polar coordinate as:
+	\begin{align*}
+		dE = \frac{4\pi^2 \hbar^2}{m L^2} n dn
+	\end{align*}
+
+	Finally, the density of states is given by:
+	\begin{align*}
+		dN = n dn d\phi = \frac{mL^2}{4\pi^2 \hbar^2} dE d\phi
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.30}
+Using sphreical coordinates, obtain an expression for $\bs{j}$ for the ground and excites states of the hydrogen atom. Show, in particular for $m_i \neq 0$ states, there is a circulating flux in the sense that $\bs{j}$ is in the direction of increasing or decreasing $\phi$ depending on whether $m_i$ is positive or negative.
+
+\begin{tcolorbox}[breakable]
+	Recall the probability current is given by:
+	\begin{align*}
+		\bs{j} = \frac{1}{2m} (\psi^*p\psi - \psi p\psi^*) = \frac{\hbar}{m} \Im(\psi^* \nabla \psi)
+	\end{align*}
+
+	Where the $\nabla$ operator in spherical coordinate is defined as:
+	\begin{align*}
+		\nabla = \frac{1}{r} \frac{\partial}{\partial r} + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} + \frac{1}{r^2 \sin^2 \theta} \frac{\partial}{\partial \phi}
+	\end{align*}
+
+	The wave function of a hydrogen atom is given by:
+	\begin{align*}
+		\psi(r, \theta, \phi) & = C_{nlm} R_{nl}(r) Y_l^m(\theta, \phi)           \\
+		                      & = C_{nlm} R_{nl}(r) P_l^m(\cos \theta) e^{im\phi}
+	\end{align*}
+
+	Where $R_{nl}$ is the radial part of the wave function and $Y_l^m$ is the spherical harmonic function. Note that $C_{nlm}$, $R_{nl}$ and $Y_l^m$ are all real numbers.
+
+	Note that since we are only interested on the imaginary part of $\psi* \nabla \psi$, we can only work on the $\hat{\psi}$ part of the wave function. Thus, we can write:
+	\begin{align*}
+		\bs{j} & = \frac{\hbar}{m_e} \Im(\psi^* \nabla \psi)                                                                            \\
+		       & = \frac{\hbar}{m_e} \Im(\psi^* \left( \frac{\bs{\hat{\phi}}}{r \sin \phi} \frac{\partial}{\partial \phi} \right) \psi) \\
+		       & = \frac{\hbar}{m_e} \Im(\psi^* \frac{i m}{r \sin \phi} \psi) \bs{\hat{\phi}}                                           \\
+		       & = \frac{\hbar}{m_e} \frac{m}{\sin \phi} |\psi^2| \bs{\hat{\phi}}
+	\end{align*}
+
+	Therefore, we show that the flux is in direction of $\phi$, depending of the magnetic quantum number $m$.
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.33}
+The propagator in momentum space analogous to (2.6.26) is given by $\bra{\bs{p''},t}\ket{\bs{p'},t_0}$. Derive an explicit expression for $\bra{\bs{p''},t}\ket{\bs{p'},t_0}$ for the free-particle case.
+
+\begin{tcolorbox}[breakable]
+	For a free particle, the hamiltonial is given by:
+	\begin{align*}
+		H = \frac{p^2}{2m}
+	\end{align*}
+
+	Thus, the propagator is given by:
+	\begin{align*}
+		\bra{\bs{p''},t}\ket{\bs{p'},t_0}
+		 & = \bra{\bs{p''}} e^{-iHt} e^{iHt_0} \ket{\bs{p'},t_0}                                     \\
+		 & = \exp\left( \frac{-i\bs{p'}^2}{2m\hbar} (t-t_0) \right) \bra{\bs{p''}} \ket{\bs{p'},t_0} \\
+		 & = \exp\left( \frac{-i\bs{p'}^2}{2m\hbar} (t-t_0) \right) \delta(\bs{p'}-\bs{p'})          \\
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 2.36}
+Show that wave-mechanical approach to the gravity-induced problem discussed in Section 2.7 also leads to phase-difference expression (2.7.17).
+
+\begin{tcolorbox}
+	In the experiment, the phase of the neutron wave function depends on the length of the path and the time it takes to travel the path i.e., $\phi \sim kx - \omega t$. Thus, the phase difference of the two path is given by:
+	\begin{align*}
+		\phi_{BD} - \phi_{AC}
+		 & = \left( \frac{p_{BD} - p_{AC}}{\hbar} \right) l_1 - \omega \left(\frac{l_1}{v_{BD}} - \frac{l_1}{v_{AC}}\right) \\
+		 & = \left( \frac{p_{BD} - p_{AC}}{\hbar} \right) l_1 \left( 1 + \frac{\hbar\omega m_n}{p_{AC}p_{BD}} \right)       \\
+		 & = \left( \frac{p_{BD} - p_{AC}}{\hbar} \right) l_1 \left( 1 + \frac{E m_n}{p^2} \right)                          \\
+		 & = \left( \frac{p_{BD} - p_{AC}}{\hbar} \right) \frac{3}{2} l_1
+	\end{align*}
+	Since $E = \hbar \omega = \frac{p^2}{2m}$.
+
+	Then we can make the following approximation and apply the conservation law of energy:
+	\begin{align*}
+		p_{BD} - p_{AC} & \approx \left( \frac{p_{BD}^2}{2m} - \frac{p_{AC}^2}{2m} \right) \frac{2m}{p} \\
+		                & = -mgz \frac{2m}{p} = -\frac{2m^2gl_2 \sin\theta}{p}
+	\end{align*}
+
+	Therefore the phase difference is given by:
+	\begin{align*}
+		\phi_{BD} - \phi_{AC}
+		 & = \left( \frac{p_{BD} - p_{AC}}{\hbar} \right) \frac{3}{2} l_1 \\
+		 & = -\frac{2m^2gl_2 \sin\theta}{p\hbar} \frac{3}{2} l_1          \\
+		 & = -\frac{3m^2g \lambda}{2\pi \hbar^2} l_1l_2 \sin\theta
+	\end{align*}
+
+\end{tcolorbox}
+\end{section}
+\end{document}

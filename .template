@@ -9,6 +9,9 @@
 \affil{Department of Physics - HKUST}
 \date{\today}
 
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\expc}[1]{\left<#1\right>}
+
 \begin{document}
 	\maketitle
 	\begin{section}{Section Name}
