@@ -1,10 +1,38 @@
 {
     "editor.wordWrap": "on",
     "latex-workshop.latex.recipes": [
+        // {
+        //     "name": "lualatex 🔃",
+        //     "tools": [
+        //         "lualatex"
+        //     ]
+        // },
         {
             "name": "pdflatex 🔃",
             "tools": [
                 "pdflatex"
+            ]
+        },
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-file-line-error",
+                "-interaction=nonstopmode",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "lualatex",
+            "command": "lualatex",
+            "args": [
+                "-synctex=1",
+                "-file-line-error",
+                "-interaction=nonstopmode",
+                "%DOC%"
             ]
         }
     ],
@@ -15,5 +43,6 @@
         "%TMPFILE%",
         "-l=%WORKSPACE_FOLDER%/.latexindent.yaml"
     ],
-    "editor.suggest.snippetsPreventQuickSuggestions": false
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "latex-workshop.intellisense.unimathsymbols.enabled": true,
 }

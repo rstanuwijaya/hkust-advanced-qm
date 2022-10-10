@@ -1,0 +1,280 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+\renewcommand{\sectionPrefix}{Problem }
+
+\title{PHYS 5260 HW5}
+\author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
+\\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\expc}[1]{\left<#1\right>}
+
+\begin{document}
+\maketitle
+\begin{section}{Sakurai 3.3}
+Consider the $2\times 2$ matrix defined by:
+$$
+	U = \frac{a_0 + i \bs{\sigma} \cdot \bs{a}}{a_0 - i \bs{\sigma} \cdot \bs{a}}
+$$
+where $a_0$ is a real number and $\bs{a}$ is a three-dimensional vector with real components.
+\begin{enumerate}
+	\item Prove that $U$ is unitary and unimodular.
+
+	\begin{tcolorbox}[breakable]
+		First lets define a matrix $A$:
+		\begin{align*}
+			A & = a_0 + i \bs{\sigma} \cdot \bs{a} \\
+			  & = \begin{pmatrix}
+				      a_0 + i a_3  & a_2 + i a_1 \\
+				      -a_2 + i a_1 & a_0 - i a_3
+			      \end{pmatrix}
+		\end{align*}
+		And:
+		$$
+			A A^\dagger = a_0^2 + (\bs{\sigma} \cdot \bs{a})^2 = a_0^2 + |\bs{a}|^2 \equiv \alpha^2
+		$$
+		Note that since $\bs{\sigma}$ is symmetric, i.e. $\bs{\sigma} = \bs{\sigma}^T$, then $\bs{\sigma}^* = \bs{\sigma}^\dagger$ and $U^* = U^\dagger$. Then we can write $U$ as:
+		$$
+			U = A(A^*)^{-1} = A (A^\dagger)^{-1}
+		$$
+		First, to prove the unitary properties, we need to show that $UU^* = UU^\dagger = I$. We can expand $UU^\dagger$ as:
+		$$
+			UU^\dagger = A (A^\dagger)^{-1} (A (A^\dagger)^{-1})^\dagger = A (A^\dagger)^{-1} A^{-1} A^\dagger = A (A A^\dagger)^{-1} A^\dagger = \alpha^2/\alpha^2 = I
+		$$
+		Second, to prove the unimodular properties, we need to show that $|U| = 1$. We can expand $|U|$ as:
+		$$
+			|U| = |A|/|A^\dagger|
+		$$
+		Where:
+		\begin{align*}
+			|A|         & = a_0^2 + a_3^2 + a_2^2 + a_1^2 = \alpha^2 \\
+			|A^\dagger| & = a_0^2 + a_3^2 + a_2^2 + a_1^2 = \alpha^2
+		\end{align*}
+		Thus:
+		$$
+			|U| = |A|/|A^\dagger| = \alpha^2/\alpha^2 = 1
+		$$
+
+	\end{tcolorbox}
+
+	\item In general, a $2\times 2$ unitary unimodular matrix represents a rotation in three dimensions. Find the axis and angle of rotation appropriate for $U$ in terms of $a_0, a_1, a_2,$ and $a_3$.
+
+	\begin{tcolorbox}
+		Recall the general rotation operator along an axis $\bs{\hat{n}}$ is given by Eq (3.2.42) and Eq (3.2.45):
+		$$
+			\exp \left( \frac{-i \bs{S} \cdot \bs{\hat{n}}}{\hbar} \right) = \exp \left( \frac{-i \bs{\sigma} \cdot \bs{\hat{n}} \phi}{2} \right) = \begin{pmatrix}
+				\cos \left( \frac{\phi}{2} \right) - i n_z \sin \left( \frac{\phi}{2} \right)
+				 & (-i n_x - n_y) \sin \left( \frac{\phi}{2} \right)                             \\
+				(-i n_x + n_y) \sin \left( \frac{\phi}{2} \right)
+				 & \cos \left( \frac{\phi}{2} \right) + i n_z \sin \left( \frac{\phi}{2} \right)
+			\end{pmatrix}
+		$$
+
+		We can write $U$ as:
+		\begin{align*}
+			U & = A(A^\dagger)^{-1}A^{-1}A = A(A A^\dagger)^{-1}A^\dagger = \frac{A^2}{\alpha^2} \\
+			  & = \frac{1}{\alpha^2} \begin{pmatrix}
+				                         2a_0^2 + 2ia_0a_3 - \alpha^2 & 2a_0a_2 + 2ia_0a_1           \\
+				                         -2a_0a_2 + 2ia_0a_1          & 2a_0^2 - 2ia_0a_3 - \alpha^2
+			                         \end{pmatrix}
+		\end{align*}
+
+		Matching with the previous equation, we can write:
+		\begin{align*}
+			\cos \left( \frac{\phi}{2} \right)     & = 2a_0^2/\alpha^2 - 1 & \iff &  & \sin \left( \frac{\phi}{2} \right) & = 2 a_0|\bs{a}|/\alpha^2 \\
+			n_x \sin \left( \frac{\phi}{2} \right) & = -2a_0a_1/\alpha^2   & \iff &  & n_x                                & = -a1/\bs{|a|}           \\
+			n_y \sin \left( \frac{\phi}{2} \right) & = -2a_0a_2/\alpha^2   & \iff &  & n_y                                & = -a2/\bs{|a|}           \\
+			n_z \sin \left( \frac{\phi}{2} \right) & = -2a_0a_3/\alpha^2   & \iff &  & n_z                                & = -a3/\bs{|a|}           \\
+		\end{align*}
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+
+\newpage
+\begin{section}{Sakurai 3.6}
+Let the Hamiltonian of a rigid body be:
+$$
+	H = \frac{1}{2} \left( \frac{K_1^2}{I_1} + \frac{K_2^2}{I_2} + \frac{K_3^2}{I_3} \right)
+$$
+where $\bs{K}$ is the angular momentum in the body frame. From this expression obtain the Heisenberg equation for $K$, and then find Euler's equation of motion in the correspondence limit.
+
+\begin{tcolorbox}[breakable]
+	Without loss of generality we can only consider the time evolution of $K_1$.
+	Using the Heisenberg picture, we can write the the time evolution of $K_1$ as:
+	\begin{align*}
+		\frac{d K_1}{dt} & = \frac{i}{\hbar} [H, K_1] = \frac{i}{2\hbar} \left( \frac{[K_2^2, K_1]}{I_2} + \frac{[K_3^2, K_1]}{I_3} \right) \\
+	\end{align*}
+	Using the commutation relation for $K_i$:
+	$$
+		[K_i, K_j] = -i \hbar \epsilon_{ijk} K_k
+	$$
+	We can write:
+	\begin{align*}
+		[K_2^2, K_1] & = K_2 [K_2, K_1] + [K_2, K_1] K_2 = i \hbar (K_2K_3 + K_3K_2)  \\
+		[K_3^2, K_1] & = K_3 [K_3, K_1] + [K_3, K_1] K_3 = -i \hbar (K_2K_3 + K_3K_2)
+	\end{align*}
+	Thus,
+	\begin{align*}
+		\frac{dK_1}{dt} & = \frac{-1}{2} (K_2K_3 + K_3 K_2) \left( \frac{1}{I_2} - \frac{1}{I_3} \right) \\
+		\frac{dK_1}{dt} & = \frac{I_2 - I_3}{2I_2I_3} (K_2K_3 + K_3 K_2)
+	\end{align*}
+
+	Similarly, we can write the time evolution of $K_2$ and $K_3$:
+	\begin{align*}
+		\frac{dK_2}{dt} & = \frac{I_3 - I_1}{2I_1I_3} (K_3K_1 + K_1 K_3) \\
+		\frac{dK_3}{dt} & = \frac{I_1 - I_2}{2I_1I_2} (K_1K_2 + K_2 K_1)
+	\end{align*}
+
+	In the correspondence/classical limit, the operators $K_i$ are replaced by the corresponding classical variables $K_i = I_i \omega_i$. Thus, we can write:
+	\begin{align*}
+		\frac{dK_1}{dt} & = (I_2 - I_3) \omega_2 \omega_3 \\
+		\frac{dK_2}{dt} & = (I_3 - I_1) \omega_3 \omega_1 \\
+		\frac{dK_3}{dt} & = (I_1 - I_2) \omega_1 \omega_2
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+
+\newpage
+\begin{section}{Sakurai 3.9}
+Consider a sequence of Euler rotations represented by:
+\begin{align*}
+	\mathcal{D}^{(1/2)}(\alpha, \beta, \gamma) & = \exp \left(\frac{-i \sigma_3 \alpha}{2}\right) \exp \left(\frac{-i \sigma_2 \beta}{2}\right) \exp \left( \frac{-i \sigma_3 \gamma}{2} \right) \\
+	                                           & = \begin{pmatrix}
+		                                               e^{-i(\alpha + \gamma)/2} \cos \left( \frac{\beta}{2} \right) & -e^{-i(\alpha - \gamma)/2} \sin \left( \frac{\beta}{2} \right) \\
+		                                               e^{i(\alpha - \gamma)/2} \sin \left( \frac{\beta}{2} \right)  & e^{i(\alpha + \gamma)/2} \cos \left( \frac{\beta}{2} \right)
+	                                               \end{pmatrix}
+\end{align*}
+Because of the group properties of rotations, we exprect that this sequence of operations is equivalent to a single rotation about some axis by an angle $\theta$. Find $\theta$.
+
+\begin{tcolorbox}
+	Recall the general rotation operator along an axis $\bs{\hat{n}}$ is given by Eq (3.2.42) and Eq (3.2.45):
+	$$
+		\exp \left( \frac{-i \bs{S} \cdot \bs{\hat{n}}}{\hbar} \right) = \exp \left( \frac{-i \bs{\sigma} \cdot \bs{\hat{n}} \theta}{2} \right) = \begin{pmatrix}
+			\cos \left( \frac{\theta}{2} \right) - i n_z \sin \left( \frac{\theta}{2} \right)
+			 & (-i n_x - n_y) \sin \left( \frac{\theta}{2} \right)                               \\
+			(-i n_x + n_y) \sin \left( \frac{\theta}{2} \right)
+			 & \cos \left( \frac{\theta}{2} \right) + i n_z \sin \left( \frac{\theta}{2} \right)
+		\end{pmatrix}
+	$$
+
+	We can match the equations to obtain $\bs{\hat{n}}$ and $\theta$, i.e.:
+	$$
+		\begin{pmatrix}
+			e^{-i(\alpha + \gamma)/2} \cos \left( \frac{\beta}{2} \right) & -e^{-i(\alpha - \gamma)/2} \sin \left( \frac{\beta}{2} \right) \\
+			e^{i(\alpha - \gamma)/2} \sin \left( \frac{\beta}{2} \right)  & e^{i(\alpha + \gamma)/2} \cos \left( \frac{\beta}{2} \right)
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			\cos \left( \frac{\theta}{2} \right) - i n_z \sin \left( \frac{\theta}{2} \right)
+			 & (-i n_x - n_y) \sin \left( \frac{\theta}{2} \right)                               \\
+			(-i n_x + n_y) \sin \left( \frac{\theta}{2} \right)
+			 & \cos \left( \frac{\theta}{2} \right) + i n_z \sin \left( \frac{\theta}{2} \right)
+		\end{pmatrix}
+	$$
+	In particular, we can solve for $\theta$ by observing the real part along the diagonal:
+	\begin{align*}
+		\cos \left( \frac{\theta}{2} \right) & = \cos \left( \frac{\alpha + \gamma}{2} \right) \cos \left( \frac{\beta}{2} \right)                            \\
+		                                     & = 2 \cos^{-1} \left( \cos \left( \frac{\alpha + \gamma}{2} \right) \cos \left( \frac{\beta}{2} \right) \right)
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+
+\newpage
+\begin{section}{Sakurai 3.12}
+Consider an ensemble of spin 1 systems. The density matrix is now a $3 \times 3$ matrix. How many independent (real) parameters are needed to characterize the density matrix? What must we know in addition to $[S_x]$, $[S_y]$, and $[S_z]$ to characterize the ensemble completely?
+
+\begin{tcolorbox}
+For spin 1 particles, there are three basis states, so the density matrix is a $3 \times 3$ matrix. Note that the density matrix is Hermitian ($\rho = \rho^\dagger$) and the trace is equal to 1 ($tr(\rho) = 1$), so we can write:
+$$
+	\rho = \begin{pmatrix}
+		\rho_{11} & \rho_{12} & \rho_{13} \\
+		\rho_{21} & \rho_{22} & \rho_{23} \\
+		\rho_{31} & \rho_{32} & \rho_{33}
+	\end{pmatrix}
+$$
+Following the two conditions above, we can write:
+\begin{align*}
+	\rho_{11} & = \rho_{11}^* & \rho_{22}                         & = \rho_{22}^* & \rho_{33} & = \rho_{33}^* \\
+	\rho_{12} & = \rho_{32}^* & \rho_{23}                         & = \rho_{32}^* & \rho_{31} & = \rho_{13}^* \\
+	          &               & \rho_{11} + \rho_{22} + \rho_{33} & = 1           &           &               
+\end{align*}
+
+Threfore, the diagonals must be real number and have sum 1, and the off diagonal elements are complex conjugates of each other, for example:
+\begin{align*}
+\rho = \begin{pmatrix}
+	\rho_{11} & \rho_{21}^* & \rho_{31}^*               \\
+	\rho_{21} & \rho_{22}   & \rho_{32}^*               \\
+	\rho_{31} & \rho_{32}   & 1 - \rho_{11} - \rho_{22}
+\end{pmatrix}
+= \begin{pmatrix}
+	u         & a-i\alpha & c-i\gamma \\
+	a+i\alpha & v         & b-i\beta  \\
+	c+i\gamma & b+i\beta  & 1-u-v
+\end{pmatrix}
+\end{align*}
+Where $a,b,c,\alpha,\beta,\gamma,u,v$ are real numbers, i.e. there are 8 degrees of freedom. In addition to $[S_x]$, $[S_y]$, and $[S_z]$, we need to know the linear combinations of the spin operators, i.e., $[S_x^2]$, $[S_y^2]$, $[S_xS_y]$, $[S_y, S_z]$, $[S_zS_x]$ (as $[S_z^2] = 2\hbar^2 - [S_x^2] - [S_y^2]$).
+\end{tcolorbox}
+\end{section}
+
+
+\newpage
+\begin{section}{Sakurai 3.15}
+\begin{enumerate}
+	\item Let $J$ be angular momentum. (It may stand for orbital $L$, spin $S$, or $J_{total}$.) Using the fact that $J_x, J_y, J_z$ ($J_\pm \equiv J_x \pm i J_y$) satisfy the usual angular-momentum relations, prove:
+	$$
+		J^2 = J_z^2 + J_+J_- - \hbar J_z
+	$$
+
+	\begin{tcolorbox}
+		Using the definition of $J_\pm$, we can compute $J_+J_-$:
+		\begin{align*}
+			J_+J_- & = J_x^2 + J_y^2 - i [J_x, J_y] \\
+			       & = J_x^2 + J_y^2 + \hbar J_z
+		\end{align*}
+
+		Therefore, we have:
+		\begin{align*}
+			J^2 & = J_z^2 + J_+J_- - \hbar J_z                    \\
+			    & = J_z^2 + J_x^2 + J_y^2 + \hbar J_z - \hbar J_z \\
+			    & = J_z^2 + J_x^2 + J_y^2
+		\end{align*}
+	\end{tcolorbox}
+	\item Using (a) (or otherwise), derive the famous expression for the coefficient $c_-$ that appears in:
+	$$
+		J_- \psi_{jm}= c_- \psi_{j, m-1}
+	$$
+
+	\begin{tcolorbox}
+		First, we can rewrite the equation as:
+		\begin{align*}
+			J_- \ket{j, m}                & = c_- \ket{j, m-1} \\
+			\bra{j, m-1} J_- \ket{j, m}   & = c_-              \\
+			\bra{j, m} J_+ J_- \ket{j, m} & = |c_-|^2
+		\end{align*}
+
+		Using the previous result, we have $J_+J_- = J^2 - J_z^2 + \hbar J_z$. Note the following identities:
+		\begin{align*}
+			J^2 \ket{j, m}       & = \hbar^2 j (j+1) \ket{j, m} \\
+			J_z^2 \ket{j, m}     & = \hbar^2 m^2 \ket{j, m}     \\
+			\hbar J_z \ket{j, m} & = \hbar^2 m \ket{j, m}
+		\end{align*}
+
+		Therefore, we have:
+		\begin{align*}
+			\bra{j, m} J_+ J_- \ket{j, m}
+			        & = \bra{j, m} \left( J^2 - J_z^2 + \hbar J_z \right) \ket{j, m}                   \\
+			|c_-|^2 & = \bra{j, m} \left( \hbar^2 j (j+1) - \hbar^2 m^2 + \hbar^2 m \right) \ket{j, m} \\
+			|c_-|^2 & = \hbar^2 \left( j (j+1) - m(m+1) \right)                                        \\
+			c_-     & = \hbar \sqrt{j (j+1) - m(m+1)}
+		\end{align*}
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+\end{document}
