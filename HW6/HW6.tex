@@ -1,0 +1,270 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+\renewcommand{\sectionPrefix}{Problem }
+
+\title{PHYS 5260 HW6}
+\author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
+\\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\expc}[1]{\left<#1\right>}
+
+\begin{document}
+\maketitle
+\begin{section}{Sakurai 3.21}
+The goal of theis problem is to determine degenerate eigenstates of the three dimensional isotropic harmonic oscillator writeen as eigenstates of $\bs{L}^2$ and $L_z$, in terms of the Cartesian eigenstates $\ket{n_x, n_y, n_z}$.
+
+\begin{enumerate}
+	\item Show that the angular-momentum operators are given by:
+	$$
+		L_i = i\hbar \epsilon_{ijk} a_j a_k^\dagger
+	$$
+	$$
+		\bs{L}^2 = \hbar^2 \left[ N(N+1) - a_k^\dagger a_k^\dagger a_j a_j \right]
+	$$
+
+	where summation is implied over repeated indices, $\epsilon_{ijk}$ is the totally antisymmetric symbol, and $N \equiv a_j^\dagger a_j$ counts the total number of quanta.
+
+	\begin{tcolorbox}[breakable]
+		Recall for $L_z$, we have $L_z = x p_y - y p_x$. In general we have the following relation:
+		\begin{align*}
+			L_i & = \epsilon_{ijk} x_j p_k
+		\end{align*}
+
+		Next, consider the following relations:
+		\begin{align*}
+			x_j     & = \sqrt{\frac{\hbar}{2 m \omega}} (a_j^\dagger + a_j)       \\
+			p_k     & = i \sqrt{\frac{\hbar m \omega}{2}} (a_k^\dagger - a_k)     \\
+			x_j p_k & = \frac{i \hbar}{2} (a_j^\dagger + a_j) (a_k^\dagger - a_k) \\
+		\end{align*}
+
+		Then, note that $a_i, a_j$ commutes since they are independent. Therefore, we have:
+		\begin{align*}
+			L_i & = \epsilon_{ijk} x_j p_k                                                                                \\
+			    & = \epsilon_{ijk} \frac{i \hbar}{2} (a_j^\dagger + a_j) (a_k^\dagger - a_k)                              \\
+			    & = \frac{i \hbar}{2} [(a_j^\dagger + a_j) (a_k^\dagger - a_k) - (a_k^\dagger + a_k) (a_j^\dagger - a_j)] \\
+			    & = i\hbar (a_j a_k^\dagger - a_k a_j^\dagger)                                                            \\
+			    & = i\hbar \epsilon_{ijk} a_j a_k^\dagger
+		\end{align*}
+
+		Next, consider the following relations:
+		\begin{align*}
+			\bs{L^2} & = L_i L_i                                                                                                                                                \\
+			         & = -\hbar^2 \epsilon_{ijk} a_j a_k^\dagger \epsilon_{iuv} a_u a_v^\dagger                                                                                 \\
+			         & = -\hbar^2 (a_j a_k^\dagger a_j a_k^\dagger - a_k a_j^\dagger a_j a_k^\dagger)                                                                           \\
+			         & = -\hbar^2 \left[ (a_k^\dagger a_j + \delta_{jk})^2 - a_k a_j^\dagger (a_k^\dagger a_j + \delta_{jk}) \right]                                            \\
+			         & = -\hbar^2 \left[ a_k^\dagger a_j a_k^\dagger a_j + 2 a_k^\dagger a_k + 3 - a_k a_j^\dagger a_k^\dagger a_j - a_k a_k^\dagger  \right]                   \\
+			         & = -\hbar^2 \left[ a_k^\dagger (a_k^\dagger a_j + \delta_{jk}) a_j + 2 a_k^\dagger a_k + 3 - a_k a_j^\dagger a_k^\dagger a_j - a_k a_k^\dagger  \right]   \\
+			         & = -\hbar^2 \left[ a_k^\dagger a_k^\dagger a_j a_j + a_k^\dagger a_k + 2 a_k^\dagger a_k + 3 - a_k a_k^\dagger a_j^\dagger a_j - a_k a_k^\dagger  \right] \\
+			         & = -\hbar^2 \left[ a_k^\dagger a_k^\dagger a_j a_j + 3 a_k^\dagger a_k + 3 - a_k a_k^\dagger (a_j^\dagger a_j - 1)  \right]                               \\
+			         & = -\hbar^2 \left[ a_k^\dagger a_k^\dagger a_j a_j + 3 a_k^\dagger a_k + 3 - (a_k^\dagger a_k + 1) (a_j^\dagger a_j - 1)  \right]                         \\
+			         & = -\hbar^2 \left[ a_k^\dagger a_k^\dagger a_j a_j + 3N + 3 - (N + 3) (N - 1)  \right]                                                                    \\
+			\bs{L^2} & = -\hbar^2 \left[ a_k^\dagger a_k^\dagger a_j a_j + N(N+1) \right] \qed
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Use these relations to express the states $\ket{qlm} = \ket{01m}, m = 0, \pm 1$, in terms of the three eigenstates $\ket{n_x n_y n_z}$ that are degenerate in energy. Write down the representation of your answer in coordinate space, and check that the angular and radial dependences are correct.
+
+	\begin{tcolorbox}[breakable]
+		First, consider the following relation:
+		\begin{align*}
+			\bra{n_x n_y n_z} L_z \ket{qlm} = m \hbar \bra{n_x n_y n_z}\ket{qlm} = i\hbar \bra{n_x n_y n_z} (a_x a_y^\dagger - a_y a_x^\dagger) \ket{qlm}
+		\end{align*}
+
+		Which yield:
+		\begin{align*}
+			m \bra{n_x n_y n_z}\ket{qlm} & =  i\sqrt{(n_x+1) n_y} \bra{n_x+1, n_y-1 ,n_z}\ket{qlm}         \\
+			                             & - i \sqrt{n_x(n_y+1)} \bra{n_x-1, n_y+1, n_z}\ket{qlm} \tagthis
+		\end{align*}
+		\begin{align*}
+			\ket{qlm} & = \sum_{n_x n_y n_z} \ket{n_x n_y n_z} \bra{{n_x n_y n_z}} \ket{qlm}
+		\end{align*}
+
+		For $N=1$, we have:
+		\begin{align*}
+			m\bra{100}\ket{01m} & = -i\bra{010}\ket{01m} \\
+			m\bra{010}\ket{01m} & = i\bra{100}\ket{01m}  \\
+			m\bra{001}\ket{01m} & = 0
+		\end{align*}
+
+		Therefore:
+		\begin{align*}
+			\ket{0,1,\pm1}_q         & = \bra{100}\ket{0,1,\pm1} \ket{100}_n + \bra{010}\ket{0,1,\pm1} \ket{010}_n + \bra{001}\ket{0,1,\pm1} \ket{001}_n \\
+			                         & = \bra{100}\ket{0,1,\pm1} \left( \ket{100}_n \pm i \ket{010}_n \right)                                            \\
+			\Aboxed{\ket{0,1,\pm1}_q & = \frac{1}{\sqrt{2}} \left( \ket{100}_n \pm i \ket{010}_n \right)}                                                \\
+			\Aboxed{\ket{0,1,0}_q    & =\ket{001}}                                                                                                       \\
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Repeat for $\ket{qlm} = \ket{200}$.
+	\begin{tcolorbox}
+		Using the Equation 1 we have the following relations:
+		\begin{align*}
+			m\bra{110}\ket{200} & \to \bra{200}\ket{200} - \bra{020}\ket{200} = 0 \\
+			m\bra{101}\ket{200} & \to \bra{011}\ket{200} = 0                      \\
+			m\bra{011}\ket{200} & \to \bra{101}\ket{200} = 0                      \\
+			m\bra{200}\ket{200} & \to \bra{110}\ket{200} = 0                      \\
+			m\bra{020}\ket{200} & \to \bra{110}\ket{200} = 0
+		\end{align*}
+
+		Using the given form of $\bs{L^2}$ we have:
+		\begin{align*}
+			\bra{002}L^2\ket{200} & = 0 = 6\bra{002}\ket{200} - 2\ket{200}\ket{200} - 2\ket{020}\ket{200} - 2\ket{002}\ket{200} \\
+			                      & =  4\bra{002}\ket{200} - 2\ket{200}\ket{200} - 2\ket{020}\ket{200}
+		\end{align*}
+
+		Combining with the previous result, we have:
+		\begin{align*}
+			\bra{002}\ket{200} = \bra{020}\ket{200} = \bra{200}\ket{200}
+		\end{align*}
+		which implies these three states have the same probability amplitude, whereas the others are 0. Therefore, we have:
+		\begin{align*}
+			\Aboxed{\ket{200}_q & = \frac{1}{\sqrt{3}} (\ket{200}_n + \ket{020}_n + \ket{002}_n)}
+		\end{align*}
+	\end{tcolorbox}
+
+	\newpage
+	\item Repeat for $\ket{qlm} = \ket{02m}$, with $m = 0, 1, 2$.
+	\begin{tcolorbox}[breakable]
+		Using the Equation 1 we have the following relations:
+		\begin{align*}
+			m\bra{110}\ket{02m} & = i\sqrt{2}(\bra{200}\ket{02m} - \bra{020}\ket{02m}) \\
+			m\bra{101}\ket{02m} & = -i\bra{011}\ket{02m}                               \\
+			m\bra{011}\ket{02m} & = i\bra{101}\ket{02m}                                \\
+			m\bra{200}\ket{02m} & = -i\sqrt{2}\bra{110}\ket{02m}                       \\
+			m\bra{020}\ket{02m} & = i\sqrt{2}\bra{110}\ket{02m}                        \\
+			m\bra{002}\ket{02m} & = 0
+		\end{align*}
+
+		Meanwhile, using the given form of $\bs{L^2}$, we have:
+		\begin{align*}
+			\bra{200}L^2\ket{02m} \to 6 \bra{200}\ket{02m} & = 6 \bra{200}\ket{02m} + 2\left( \bra{200}\ket{02m} + \bra{020}\ket{02m} + \bra{002}\ket{02m} \right) \\
+			0                                              & = \bra{200}\ket{02m} + \bra{020}\ket{02m} + \bra{002}\ket{02m}
+		\end{align*}
+		$\bra{020}L^2\ket{02m}$ and $\bra{002}L^2\ket{02m}$ will yield similar result.
+
+		For $m=0$, we have:
+		\begin{align*}
+			0 & = \bra{200}\ket{020} + \bra{020}\ket{020} + \bra{002}\ket{020} \\
+			0 & = \bra{200}\ket{002} - \bra{020}\ket{002}
+		\end{align*}
+		While the rest are 0. Therefore, for $\ket{020}$, we have:
+		\begin{align*}
+			\Aboxed{\ket{200}_q & = \frac{1}{\sqrt{6}} (\ket{200}_n + \ket{020}_n - 2\ket{002}_n)}
+		\end{align*}
+
+		For $m=1$, we have:
+		\begin{align*}
+			\bra{002}\ket{021} & = 0                                                  \\
+			\bra{200}\ket{021} & = -i\sqrt{2}\bra{110}\ket{021}                       \\
+			\bra{020}\ket{021} & = i\sqrt{2}\bra{110}\ket{021}                        \\
+			\bra{110}\ket{021} & = i\sqrt{2}(\bra{200}\ket{021} - \bra{020}\ket{021}) \\
+			\bra{011}\ket{021} & = i \bra{101}\ket{021}
+		\end{align*}
+		Which implies:
+		\begin{align*}
+			0 = \bra{110}\ket{021} = \bra{200}\ket{021} = \bra{020}\ket{021} = \bra{002}\ket{021}
+		\end{align*}
+		Thus, for $\ket{021}$, we have:
+		\begin{align*}
+			\ket{021}_q         & = (\bra{101}\ket{021} \ket{101}_n + \bra{011}\ket{021} \ket{011}_n) \\
+			                    & = \bra{101}\ket{021} ( \ket{101}_n + i \ket{011}_n)                 \\
+			\Aboxed{\ket{021}_q & = \frac{1}{\sqrt{2}} (\ket{101}_n + i \ket{011}_n)}
+		\end{align*}
+
+		For $m=2$, we also have:
+		\begin{align*}
+			0                  & = \bra{101}\ket{021} = \bra{011}\ket{021} = \bra{002}\ket{021} \\
+			0                  & = \bra{200}\ket{021} + \bra{020}\ket{021}                      \\
+			\bra{200}\ket{022} & = -i\sqrt{2} \bra{110}\ket{022}                                \\
+			\bra{020}\ket{022} & = i\sqrt{2} \bra{110}\ket{022}                                 \\
+		\end{align*}
+		Therefore, for $\ket{022}$, we have:
+		\begin{align*}
+			\ket{022}_q         & = (\bra{110}\ket{022} \ket{110}_n + \bra{200}\ket{022} \ket{200}_n + \bra{020}\ket{022} \ket{020}_n) \\
+			                    & = \bra{110}\ket{022} (\ket{110}_n + -i\sqrt{2} \ket{200}_n + i\sqrt{2} \ket{020}_n)                  \\
+			\Aboxed{\ket{022}_q & =\frac{1}{\sqrt{5}} (\ket{110}_n + -i\sqrt{2} \ket{200}_n + i\sqrt{2} \ket{020}_n)}
+		\end{align*}
+
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 3.24}
+We are to add angular momenta $j_1 = 1$ and $j_2 = 1$ to form $j = 2, 1,$ and $0$ states. Using either the ladder operator method or the recursion relation, express all (nine) $\left\{ j,m \right\}$ eigenkets in terms of $\ket{j_1j_2;m_1,m_2}$. Write your answer as:
+$$
+	\ket{j=1,m=1} = \frac{1}{\sqrt{2}}\ket{+,0} - \frac{1}{\sqrt{2}}\ket{0,+}
+$$
+where $+$ and $0$ stand for $m_{1,2} = 1, 0$ respectively.
+
+\begin{tcolorbox}[breakable]
+	First, recall the ladder operator method:
+	\begin{align*}
+		J_\pm \ket{j,m} = \hbar \sqrt{j(j+1) - m(m\pm 1)} \ket{j,m\pm 1}
+	\end{align*}
+
+	For $j = j_1 + j_2 = 2$, we have:
+	\begin{align*}
+		\Aboxed{\ket{2,2}    & = \ket{++}}                                                                                                      \\
+		J_- \ket{2,2}        & = (J_{1-} \otimes 1 + 1 \otimes J_{2-}) \ket{++}                                                                 \\
+		\sqrt{6-2} \ket{2,1} & = \sqrt{2} \ket{0+} + \sqrt{2} \ket{+0}                                                                          \\
+		\Aboxed{\ket{2,1}    & = \frac{1}{\sqrt{2}} \ket{0+} + \frac{1}{\sqrt{2}} \ket{+0}}                                                     \\
+		J_- \ket{2,1}        & = (J_{1-} \otimes 1 + 1 \otimes J_{2-})  \frac{1}{\sqrt{2}} \left( \ket{0+} + \ket{+0} \right)                   \\
+		\sqrt{6-0} \ket{2,0} & = \frac{1}{\sqrt{2}}\left( \sqrt{2} \ket{-0} + \sqrt{2} \ket{00} + \sqrt{2} \ket{00} + \sqrt{2} \ket{0-} \right) \\
+		\Aboxed{\ket{2,0}    & = \frac{1}{\sqrt{6}}\left( \ket{-0} + 2\ket{00} + \ket{0-} \right)}
+	\end{align*}
+
+	By symmetry arguement, we have:
+	\begin{align*}
+		\Aboxed{\ket{2,-1} & = \frac{1}{\sqrt{2}} \ket{0-} + \frac{1}{\sqrt{2}} \ket{-0}} \\
+		\Aboxed{\ket{2,-2} & = \ket{--}}
+	\end{align*}
+
+	For $j = j_1 + j_2 = 1$, first note that: $\bra{2,1}\ket{1,1} = 0$, and $\ket{1,1}$ must be normalizeable. Thus, we have:
+	\begin{align*}
+		\Aboxed{\ket{1,1}  & = \frac{1}{\sqrt{2}} \left( \ket{+0} - \ket{0+} \right)}                                                         \\
+		J_- \ket{1,1}      & = (J_{1-} \otimes 1 + 1 \otimes J_{2-}) \left( \frac{1}{\sqrt{2}} \left( \ket{+0} - \ket{0+} \right) \right)     \\
+		\sqrt{2} \ket{1,0} & = \frac{1}{\sqrt{2}} \left( \sqrt{2} \ket{00} - \sqrt{2} \ket{-+} + \sqrt{2} \ket{+-} - \sqrt{2} \ket{0} \right) \\
+		\Aboxed{\ket{1,0}  & = \frac{1}{\sqrt{2}} \left( \ket{+-} - \ket{-+} \right)}                                                         \\
+		\Aboxed{\ket{1,-1} & = \frac{1}{\sqrt{2}} \left( \ket{-0} - \ket{0-} \right)}
+	\end{align*}
+
+	For $j = j_1 + j_2 = 0$, we have:
+	\begin{align*}
+		\ket{0,0} & = a \ket{-+} + b \ket{00} + c \ket{+-} \\
+	\end{align*}
+	Taking inner product $\bra{00}\ket{10}$ and $\bra{00}\ket{20}$ gives:
+	\begin{align*}
+		\bra{00}\ket{10} = a - c = 0 \\
+		\bra{00}\ket{20} = a+2b+c = 0
+	\end{align*}
+	Which yields: $a = c$ and $b=-a=-c$. Therefore:
+	\begin{align*}
+		\Aboxed{\ket{0,0} & = \frac{1}{\sqrt{3}} \left( \ket{-+} - \ket{00} + \ket{+-} \right)} \\
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 3.27}
+Express the matrix element $\bra{\alpha_2\beta_2\gamma_2} \bs{J}_3^2 \ket{\alpha_1\beta_1\gamma_1}$ in terms of a series in
+$$
+	\mathcal{D}_{mn}^j (\alpha\beta\gamma) = \bra{\alpha\beta\gamma} \ket{jmn}
+$$
+
+\begin{tcolorbox}
+	We can simply insert an identity operator as follows:
+	\begin{align*}
+		\bra{\alpha_2\beta_2\gamma_2} \bs{J}_3^2 \ket{\alpha_1\beta_1\gamma_1}
+		 & = \sum_{jmn} \sum_{j'm'n'} \bra{\alpha_2\beta_2\gamma_2} \ket{jmn}\bra{jmn} \bs{J}_3^2 \ket{j'm'n'}\bra{j'm'n'} \ket{\alpha_1\beta_1\gamma_1}         \\
+		 & = \sum_{jmn} \sum_{j'm'n'} \bra{\alpha_2\beta_2\gamma_2} \ket{jmn} n^2 \delta_{jj'}\delta_{mm'}\delta_{nn'} \bra{j'm'n'}\ket{\alpha_1\beta_1\gamma_1} \\
+		 & = \sum_{jmn} n^2 \bra{\alpha_2\beta_2\gamma_2} \ket{jmn}  \bra{j'm'n'}\ket{\alpha_1\beta_1\gamma_1}                                                   \\
+		 & = \sum_{jmn} n^2 \mathcal{D}_{mn}^j (\alpha_2\beta_2\gamma_2) \left( \mathcal{D}_{mn}^j (\alpha_1\beta_1\gamma_1) \right)^*                           \\
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+\end{document}
