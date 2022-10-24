@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+% \renewcommand{\sectionPrefix}{Problem }
+\usepackage{unicode-math} 
+
+\title{PHYS 5260 HW7}
+\author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
+\\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+\newcommand{\bs}{\symbfit}
+\newcommand{\expc}[1]{\left<#1\right>}
+
+\begin{document}
+\maketitle
+\begin{section}{Sakurai 4.3}
+A quantum-mechanical state $\Psi$ is known to be a simultaneous eigenstate of two Hermitian operators $A$ and $B$ that {\it anticommute}
+$$
+	AB + BA = 0
+$$
+What can you say about the eigenvalues of $A$ and $B$? Illustrate your point using the parity operator (which can be chosen to satisfy $π = π^{-1} = π$) and the momentum operator.
+\begin{tcolorbox}
+	We can first denote the simultaneous eigenstate as $\ket{\Psi} = \ket{a,b}$. Then, using the anticommutation relation, we have:
+	$$
+		(AB + BA)\ket{a,b} = (ab+ba)\ket{a,b} = 0
+	$$
+	which implies either $a=0$ or $b=0$.
+
+	For $A = π$ and $B = \bs{p}$, then we have:
+	\begin{align*}
+		\bra{Ψ}{π^† \bs{p} π}\ket{Ψ} & = -\bra{Ψ}{\bs{p}}\ket{Ψ}             \\
+		\bra{Ψ}{\bs{p} π}\ket{Ψ}     & = -\bra{Ψ}{π \bs{p}}\ket{Ψ}           \\
+		0                            & = -\bra{Ψ}{\bs{p} π -π \bs{p}}\ket{Ψ}
+	\end{align*}
+	Then in this case, $p$ must be 0.
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 4.6}
+Consider a symmetric rectangular double-well potential:
+\begin{align*}
+	V = \begin{cases}
+		    ∞      & \text{for $|x| > a+b$} \\
+		    0      & \text{for $a < |x| < a+b$} \\
+		    V_0 >0 & \text{for $|x| < a$} \\
+	    \end{cases}
+\end{align*}
+Assuming that $V_0$ is very high compared to the quantized energies of low-lying states, obtain an approximate expression for the energy splitting between the two lowest-lying states.
+
+\begin{tcolorbox}[breakable]
+	Without loss of generality, we can only consider the case where $x > 0$. Denote $ψ^{(L)}(x)$ as the wavefunction inside finite potential barrier, i.e. $|x| < a$, and $ψ^{(R)}(x)$ as the wavefunction at $a < |x| < a+b$. Then, we have the following boundary conditions:
+	\begin{align*}
+		\psi^{(L)}_s(a) &= \psi^{(R)}_s(a) \\
+		\psi^{(R)}_s(a+b) &= \psi^{(R)}_a(a+b) = 0
+	\end{align*}
+
+	We can guess the form of the wavefunction as:
+	\begin{align*}
+		ψ_s^{(R)} &= A_s \sin (k_s(x-a-b)) \\
+		ψ_a^{(R)} &= A_a \sin (k_a(x-a-b)) \\
+		ψ_s^{(L)} &= B_s \cosh (κ_s x) \\
+		ψ_a^{(L)} &= B_a \sinh (κ_a x)
+	\end{align*}
+
+	Which gives us the matching condition at $x = a$ and its derivative:
+	\begin{align*}
+		0 &= A_s \sin (k_s b) + B_s \cosh (κ_s a) \\
+		0 &= k_sA_s \cos (k_s b) - κ_s B_s \cosh (κ_s a) \\
+		0 &= A_a \sin (k_a b) + B_a \sinh (κ_a a) \\
+		0 &= k_aA_a \cos (k_a b) + κ_a B_a \sinh (κ_a a) 
+	\end{align*}
+
+	Using the approximation $E ≪ V_0$, we have $κ ≡ \sqrt{2mV_0}/\hbar = κ_s = κ_a$. Which gives:
+	\begin{align*}
+		k_s \cot (k_s b) &= -κ \tanh (κ a) \\
+		k_s \cot (k_s b) &= -κ \coth (κ a) 
+	\end{align*}
+
+	Since $E ≪ V_0$, we can expect $λ ≈ 2b = (1+ϵ) 2b$ or $k = \frac{2π}{λ} = π(1-ϵ)$. Then, we have:
+	\begin{align*}
+		\tan (kb) &= \frac{\sin(kb)}{\cos(kb)} = \frac{\sin(π)\cos(πϵ) - \cos(π)\sin(πϵ)}{\cos(π)\cos(πϵ) + \sin(π)\sin(πϵ)} \\
+		&= \frac{\sin(πϵ)}{\cos(πϵ)} = \tan(πϵ) \\
+		&≈ πϵ = kb - π 
+	\end{align*}
+
+	Therefore the previous condition yields:
+	\begin{align*}
+		\frac{k_s}{k_s b - π} &= -κ \tanh (κa) \\
+		\frac{k_a}{k_a b - π} &= -κ \coth (κa) 
+	\end{align*}
+
+	And the energy splitting is given by $E = \hbar^2 k^2/2m$:
+	\begin{align*}
+		ΔE &= \frac{\hbar^2}{2m} (k_a^2 - k_s^2) \\
+		&= \frac{\hbar^2π^2κ^2}{2m} \left( \frac{(\coth (κa))^2}{(1 + κb \coth (κa))^2} - \frac{(\tanh (κa))^2}{(1 + κb \tanh (κa))^2} \right) \\
+		&= \frac{\hbar^2π^2κ^2}{2m} \left( \frac{1}{(\tanh(κa) + κb)^2} - \frac{1}{(\coth (κa) + κb)^2} \right) 
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 4.9}
+Let $ϕ(p')$ be the momentum-space wave function for state $\ket{α}$ - that is, $ϕ(p') = \bra{p'}\ket{α}$ Is the momentum-space wave function for the time-reversed state $θ\ket{α}$ given by $ϕ(p')$, by $ϕ(-p')$, by $ϕ^*(p')$, or by $ϕ^*(-p')$? Justify your answer.
+
+\begin{tcolorbox}[breakable]
+	First note the time-reversal operator satisfies anitunitary property the time-reversal property of the momentum operator:
+	\begin{align*}
+		θ(c\ket{α}) & = c^*θ\ket{α} \\
+		θpθ^{-1} = -p \iff θ\ket{p'} = \ket{-p'}
+	\end{align*}
+
+	Then, we can expand the time-reversed state in terms of the momentum eigenkets:
+	\begin{align*}
+		Θ\ket{α} & = \int d^3p'' Θ\left( \ket{p''} \bra{p''}\ket{α} \right) \\
+		         & = \int d^3p'' \ket{-p''} \bra{p''}\ket{α}^*              \\
+		         & = \int d^3p'' \ket{p''} \bra{-p''}\ket{α}^*
+	\end{align*}
+
+	Thus, the time-reversed momentum-space wave function is given by:
+	\begin{align*}
+		\bra{p'}Θ\ket{α} & = \bra{p'}\int d^3p'' \ket{p''} \bra{-p''}\ket{α}^* \\
+		                 & = \bra{-p'}\ket{α}^* = ϕ^*(-p')
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 4.12}
+The Hamiltonian for a spin 1 system is given by:
+$$
+	H =  A S_z^2 + B (S_x^2 - S_y^2)
+$$
+Solve this problem exactly to find the normalized energy eigenstates and eigenvalues. (A spin-dependent Hamiltonian of this kind appears in crystal physics.) Is this Hamiltonian invariant under the time-reversal? How do the normalized eigenstates you obtained transform under time reversal?
+
+\begin{tcolorbox}[breakable]
+	Recall the spin operators for spin-1 system:
+	\begin{align*}
+		S_x & = \frac{\hbar}{\sqrt{2}} \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}                \\
+		S_y & = \frac{\hbar}{\sqrt{2}} \begin{pmatrix} 0 & -i & 0 \\ i & 0 & -i \\ 0 & i & 0 \end{pmatrix}              \\
+		S_z & = \frac{\hbar}{\sqrt{2}} \begin{pmatrix} \sqrt{2} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & -\sqrt{2} \end{pmatrix}
+	\end{align*}
+
+	Therefore the Hamiltonian is given by:
+	\begin{align*}
+		H = A S_z^2 + B (S_x^2 - S_y^2) & = \hbar \begin{pmatrix} A & 0 & B \\ 0 & 0 & 0 \\ B & 0 & A \end{pmatrix}
+	\end{align*}
+
+	The eigenvalues and corresponding eigenvectors are given by:
+	\begin{align*}
+		\lambda_1    & = A + B                                                                                   &
+		\ket{\Psi_1} & = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} = (\ket{1,1} + \ket{1,-1})   \\
+		\lambda_2    & = A - B                                                                                   &
+		\ket{\Psi_2} & = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix} = \ket{1,1} - \ket{1,-1}    \\
+		\lambda_3    & = 0                                                                                       &
+		\ket{\Psi_3} & = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} = \ket{1,0}
+	\end{align*}
+
+	We can check that the Hamiltonian is invariant under time-reversal by checking the eigenstate under time-reversal transformation, i.e. $Θ\ket{Ψ}$:
+	\begin{align*}
+		Θ\ket{\Psi_1} & = -\ket{1,1} - \ket{1,-1} = -\ket{\Psi_1} \\
+		Θ\ket{\Psi_2} & = -\ket{1,1} + \ket{1,-1} = -\ket{\Psi_2} \\
+		Θ\ket{\Psi_3} & = \ket{1,0} = \ket{\Psi_3}
+	\end{align*}
+
+	Suppose $\ket{Ψ} = α\ket{Ψ_1} + β\ket{Ψ_2} + γ\ket{Ψ_3}$, e.g., $H\ket{Ψ} = λ_1 \ket{Ψ_1} + λ_2 \ket{Ψ_2} + λ_3 \ket{Ψ_3}$. Thus,
+	\begin{align*}
+		ΘHΘ^{-1}\ket{Ψ} & = ΘHΘ^{-1}\left( α\ket{Ψ_1} + β\ket{Ψ_2} + γ\ket{Ψ_3} \right)               \\
+		                & = ΘH \left( α^*\ket{-Ψ_1} + β^*\ket{-Ψ_2} + γ^*\ket{Ψ_3} \right)            \\
+		                & = ΘH \left( α^*\ket{-Ψ_1} + β^*\ket{-Ψ_2} + γ^*\ket{Ψ_3} \right)            \\
+		                & = Θ \left( λ_1 α^*\ket{-Ψ_1} + λ_2 β^*\ket{-Ψ_2} + λ_3 γ^*\ket{Ψ_3} \right) \\
+		                & = \left( λ_1^* α\ket{Ψ_1} + λ_2^* β \ket{Ψ_2} + λ_3 γ \ket{Ψ_3} \right)
+	\end{align*}
+
+	But $λ_1, λ_2$ are real numbers, i.e., $λ^* = λ$. Thus, $ΘHΘ^{-1} = H$ or $H$ is invariant under time reversal transformation.
+\end{tcolorbox}
+\end{section}
+\end{document}
