@@ -4,6 +4,15 @@
         {
             "name": "lualatex 🔃",
             "tools": [
+                "lualatex",
+                "bibtex",
+                "lualatex",
+                "lualatex",
+            ]
+        },
+        {
+            "name": "lualatex 🔃",
+            "tools": [
                 "lualatex"
             ]
         },
@@ -34,7 +43,22 @@
                 "-interaction=nonstopmode",
                 "%DOC%"
             ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "%DOCFILE%"
+            ]
         }
+
     ],
     "latex-workshop.latex.autoBuild.run": "onSave",
     "latex-workshop.latexindent.args": [
