@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+\usepackage{xfrac}    
+\usepackage{nicefrac}
 
 \renewcommand{\sectionPrefix}{Problem }
 
@@ -77,29 +79,119 @@
 
 	\newpage
 	\begin{section}{Sakurai 5.6}
-		(From Merzbacher 1970.) A slightly anisotropic three-dimensional harmonic oscillator has $\omega_z \approx \omega_x = \omega_y$ . A charged particle moves in the field of this oscillator and is at the same time exposed to a uniform magnetic field in the $x$-direction. Asssuming that the Zeeman splitting is comparable to the splitting produced by the anisotropy, but small compared to nw, calculate to first order the energies of the components of the first excited state. Discuss various limiting cases.
+		(From Merzbacher 1970.) A slightly anisotropic three-dimensional harmonic oscillator has $\omega_z \approx \omega_x = \omega_y$ . A charged particle moves in the field of this oscillator and is at the same time exposed to a uniform magnetic field in the $x$-direction. Asssuming that the Zeeman splitting is comparable to the splitting produced by the anisotropy, but small compared to $\hbar \omega$, calculate to first order the energies of the components of the first excited state. Discuss various limiting cases.
 
 		\begin{tcolorbox}[breakable]
-			test
-		\end{tcolorbox}
+        First we can express the harmonic frequency as:
+				\begin{align*}
+					\omega_x = \omega_y = \omega, \quad \omega_z = (1+\epsilon) \omega
+				\end{align*}
+        where $\epsilon \ll 1$ is the perturbation factor.
+
+        The Hamiltonian is given by:
+        \begin{align*}
+          H &= \frac{1}{2m} \left(\bs{p} - \frac{q}{c} \bs{A}\right)^2 + \frac{m \omega^2}{2} \left( x^2 + y^2 + (1+\epsilon)^2 z^2 \right) \\
+            &= \frac{1}{2m} \left(\bs{p} - \frac{q}{c} \bs{A}\right)^2 + \frac{m\omega^2}{2} \left(x^2 + y^2 + 2\epsilon z^2 \right) 
+        \end{align*}
+        where $\bs{A} = \frac{1}{2} \bs{B}\times\bs{r} = \frac{1}{2} B (\bs{\hat{x}}\times{r})$. 
+        
+        The first term of the Hamiltonian is:
+        \begin{align*}
+          \frac{1}{2m} \left(\bs{p} - \frac{q}{c} \bs{A}\right)^2 
+          &= \frac{p^2}{2m} + \frac{B^2q^2}{8mc^2} \left(\bs{\hat{x}} \times \bs{r}\right)^2 - \frac{qB}{4mc} \left[\bs{p} \cdot (\bs{\hat{x}} \times r) + (\bs{\hat{x}} \times r) \cdot \bs{p} \right] \\
+          &= \frac{p^2}{2m} + \frac{B^2q^2}{8mc^2} \left(y \bs{\hat{z}} - z \bs{\hat{y}}\right)^2 - \frac{qB}{4mc} \left[p_z y - p_y z + y p_z - z p_y\right] \\
+          &= \frac{p^2}{2m} + \frac{B^2q^2}{8mc^2} \left(y^2+z^2\right) - \frac{qB}{2mc} L_x 
+        \end{align*}
+		
+		Note the assumption ``the Zeeman splitting is comparable to the splitting produced by the anisotropy'' implies $\epsilon \hbar \omega \approx qB\hbar/mc \iff \epsilon \approx qB/mc\omega$. Thus, the second term can be ignored.
+
+		Therefore, the total Hamiltonian is: 
+		\begin{align*}
+			H = H_0 + V &= \frac{p^2}{2m} + \frac{1}{2} m\omega^2r^2 - \frac{qB}{2mc}L_x + \epsilon m \omega^2 z^2 
+		\end{align*}
+
+		where $H_0$ is the unperturbed Hamiltonian and $V$ is the perturbation defined as follows:
+		\begin{align*}
+			H_0 \equiv \frac{p^2}{2m} + \frac{1}{2} m\omega^2r^2, \qquad 
+			V \equiv - \frac{qB}{2mc}L_x + \epsilon m \omega^2 z^2
+		\end{align*}
+
+		For simplicity, we can rotate the perturbation term by $-\pi/2$ along y-axis, such that:
+		\begin{align*}
+			V \rightarrow - \frac{qB}{2mc}L_z + \epsilon m \omega^2 x^2
+		\end{align*}
+
+		The solution for first excited state of the unperturbed Hamiltonian is triple degenerate, with energy $E = 5 \hbar\omega/2$. The states in the $\ket{qlm}$ and $\ket{n_xn_yn_z}$ space are:
+		\begin{align*}
+			\ket{+} &= \ket{0,1,1}_q = (\ket{100} + i \ket{010})/2 \\ 
+			\ket{0} &= \ket{0,1,0}_q = \ket{001} \\
+			\ket{-} &= \ket{0,1,-1}_q = (\ket{100} - i \ket{010})/2 \\ 
+		\end{align*}
+
+		Note the following relations: 
+		\begin{align*}
+			\bra{q'l'm'}L_z\ket{qlm} &= \hbar \delta_{m'm} \\
+			\bra{n_x'n_y'n_z'}x^2\ket{n_xn_yn_z} &= (2n_x^2+1)(\hbar/2m\omega) \delta_{n_x'n_x}
+		\end{align*}
+
+		Therefore the perturbation matrix is given by $V_ij = (qB/2mc)\bra{i}L_z\ket{j} + (\epsilon m \omega^2) \bra{i}x^2\ket{j}$:
+		\begin{align*}
+			V = h \begin{pmatrix}
+				-\alpha + \epsilon \omega & 0 & \epsilon \omega \\
+				0 & \epsilon \omega & 0 \\
+				\epsilon \omega & 0 & \alpha + \epsilon \omega
+			\end{pmatrix}
+		\end{align*}
+		where $\alpha = qB/2mc$.
+
+		Therefore, the energy splits are the eignvalues of this matrix, i.e.
+		\begin{align*}
+			\Delta_1^(1) = \frac{1}{2}\epsilon\hbar\omega, \epsilon\hbar\omega \pm \hbar \sqrt{ \alpha^2 + \epsilon^2 \omega^2}
+		\end{align*}
+
+		Note that in the limit $B = 0$, the re are only two splitting, i.e. $\Delta = (1/2)\epsilon\hbar\omega, (3/2)\epsilon\hbar\omega$. 
+    \end{tcolorbox}
 	\end{section}
 
 	\newpage
 	\begin{section}{Sakurai 5.9}
 		A $p$-orbital electron characterized by $\ket{n = 1, l = 1, m = -1, 0, 1}$ (ignore spin) is subjected to a potential
+		\begin{align*}
+			V = \lambda{x^2 - y^2}
+		\end{align*}
 		\begin{enumerate}
-			\item Obtain the ''correct'' zeroth-order energy eigenstates that diagonalize the perturbation. YOu need not evaluate the energy shifts in detail, but show that the original threefold degeneracy is completely removed.
+			\item Obtain the ''correct'' zeroth-order energy eigenstates that diagonalize the perturbation. You need not evaluate the energy shifts in detail, but show that the original threefold degeneracy is completely removed.
 			\item Because $V$ is invariant under time reversal and because there is no longer any degeneracy, we expect each of the energy eigenstates obtained in (a) to go into itself (up to a phase factor or sign) under time reversal. Check this point explicitly
 		\end{enumerate}
 
 		\begin{tcolorbox}[breakable]
+			\begin{enumerate}
+				\item We can rewrite the given perturbation as:
+				\begin{align*}
+				\lambda{x^2 - y^2} &= \lambda r^2 \sin^2\theta (\cos^2\phi - \sin^2\phi) \\
+				&= r^2\sin^2\theta \cos2\phi \\
+				&= c_1 Y_2^{+2} + c_2 Y_2^{-2}
+				\end{align*}
+
+				which implies that the perturbation only couples the states with $m$ differing by 2. Moreover, the inner product for $\bra{n,1,-1}V\ket{n,1,+1} = \bra{n,1,+1}V\ket{n,1,-1}$ as $V$ is real. For example:
+				\begin{align*}
+					V = \lambda \begin{pmatrix}
+						0 & 0 & \alpha \\
+						0 & 0 & 0 \\
+						\alpha & 0 & 0
+					\end{pmatrix}
+				\end{align*}
+
+				The correct eigenstates are therefore: $\ket{n,1,0}$, $\left( 1/\sqrt{2} \right) (\ket{n,1,+1} \pm \ket{n,1,-1})$.
+
+				\item Under time reversal, the states ungergoes a transformation $\ket{n,l,m} \to \ket{n,l,-m}$. Therefore, the eigenstates obtained in (a) are unchanged under time reversal. 
+			\end{enumerate}
 		\end{tcolorbox}
 	\end{section}
 
 	\newpage
 	\begin{section}{Sakurai 5.12}
 		(This is a tricky problem because the degeneracy between the first state and the second state is not removed in first order. See also Gottfried 1996, p. 397, Problem 1.) This problem is from Schiff 1968, p.295, Problem 4. A system that has three unperturbed states can be represented by the perturbed Hamiltonian matrix:
-
 		\begin{align*}
 			\begin{pmatrix}
 				E_1 & 0 & a \\
@@ -107,27 +199,110 @@
 				a^* & b^* & E_2
 			\end{pmatrix},
 		\end{align*}
-
 		where $E_2 > E_1$. The quantities $a$ and $b$ are to be regarded as perturbations that are of the same order and are small compared with $E_2 - E_1$. Use the second-order nondegenerate perturbation theory to calculate the perturbed eigenvalues. (Is this procedure correct?) Then diagonalize the matrix to find the exact eigenvalues. Finally, use the second-order degenerate perturbation theory. Compare the three results obtained.
+
 		\begin{tcolorbox}[breakable]
+			First we try to solve the exact energy for the problem:
+			\begin{align*}
+				H - \lambda = 0 \quad \iff \det \begin{pmatrix}
+					E_1 - \lambda & 0 & a \\
+					0 & E_1 - \lambda & b \\
+					a^* & b^* & E_2 - \lambda
+				\end{pmatrix} = 0
+			\end{align*}
+			solving for $\lambda$ yields:
+			\begin{align*}
+				\lambda_0 = E_1, \qquad
+				\lambda_\pm = \frac{E_1 + E_2}{2} \pm \frac{E_2 - E_1}{2} \left( 1 + 2 \frac{a^2 + b^2}{(E_2 - E_1)^2} \right)
+			\end{align*}
+
+			Now we use the second-order nondegenerate perturbation theory:
+			\begin{align*}
+				V = \begin{pmatrix}
+					0 & 0 & a \\
+					0 & 0 & b \\
+					a^* & b^* & 0
+				\end{pmatrix}
+			\end{align*}
+
+			Using the second order nondegenerate perturbation theory, we obtain:
+			\begin{align*}
+				\Delta_n &= V_{nn} + \sum_{k \neq n} \frac{|V_{nk}|^2}{E_n^{(0)} - E_k^{(0)}} \\
+				\Delta_1 &= a^2/(E_1 - E_2), \quad \lambda_1 = E_1 + a^2/(E_1 - E_2) \\
+				\Delta_2 &= b^2/(E_1 - E_2), \quad \lambda_2 = E_2 + b^2/(E_1 - E_2) \\
+				\Delta_3 &= (a^2+b^2)/(E_2 - E_1), \quad \lambda_3 = E_2 + (a^2 + b^2)/(E_2 - E_1) = \lambda_+\\
+ 			\end{align*}
+			which does not agree with the exact solution.
+			
+			If we use the second-order degenerate perturbation theory to solve the degeneracy in $E_1$, we can diagonalize the result obtained using the nondegenerate perturbation method.
+			\begin{align*}
+				\left( \Delta - \frac{a^2}{E_1 - E_2} \right)\left( \Delta - \frac{b^2}{E_1 - E_2} \right) = \frac{a^2b^2}{(E_1 - E_2)^2}
+			\end{align*}
+			which yields: $\Delta_1 = 0$ and $\Delta_2 = (a^2 +b^2)/(E_1 - E_2)$. The eigenvalues are therefore:
+			\begin{align*}
+				\lambda_1 = E_1, \quad \lambda_2 = E_2 + (a^2 + b^2)/(E_1 - E_2), \quad \lambda_3 = E_2 + (a^2 + b^2)/(E_2 - E_1)
+			\end{align*}
+			
 		\end{tcolorbox}
 	\end{section}
 
 	\newpage
 	\begin{section}{Sakurai 5.15}
-		Suppose the eelectron had a very small intrinsic electric dipole moment analogous to the spin-magnetic moment (that is, $\mu_{el}$ proportional to $\sigma$). Treating the hypothetical $-\mu_{el} \cdot E$ interaction as a small perturbation, discuss qualitatively how the energy levels of the Na atom $(Z = 11)$ would be altered in the absence of any external electromagnetic field. Are the level shifts first order or second order? Indicate explicitly which states get mixed with each oters. Obtain an expression for the energy shift of the lowest level that is affected by the perturbation. Assume throughout that only the valence electron is subjected to the hypothetical interaction.
+		Suppose the electron had a very small intrinsic electric dipole moment analogous to the spin-magnetic moment (that is, $\mu_{el}$ proportional to $\sigma$). Treating the hypothetical $-\mu_{el} \cdot E$ interaction as a small perturbation, discuss qualitatively how the energy levels of the Na atom $(Z = 11)$ would be altered in the absence of any external electromagnetic field. Are the level shifts first order or second order? Indicate explicitly which states get mixed with each oters. Obtain an expression for the energy shift of the lowest level that is affected by the perturbation. Assume throughout that only the valence electron is subjected to the hypothetical interaction.
+
 		\begin{tcolorbox}[breakable]
+			For electric dipole, the interaction Hamiltonian is:
+			\begin{align*}
+				H_{el} = -\mu_{el} \cdot E
+			\end{align*}
+			where $E = -(1/e)\hat{\bs{r}} \frac{dV_c}{dr}$ and $V_c \propto -1/r$ is the Coulomb potential. 
+			
+			The perturbation term for the orbital term is:
+			\begin{align*}
+				\bs{\sigma} \cdot \hat{\bs{r}} &= \frac{1}{r} \left[ \sigma_+ (x-iy) + \sigma_- (x+iy) + \sigma_z z \right] \\
+				&= \sqrt{\frac{4\pi}{3}} \left[ \sqrt{2} (\sigma_+ Y_1^{-1} + \sigma_- Y_1^1) + \sigma_z Y_1^0 \right] 
+			\end{align*}
+			This result shows which states get mixed with each other, in this case, for $\Delta m = 0$, we need $\Delta l = \pm 1$
+			Moreover, the perturbation term for the radial term is:
+			\begin{align*}
+				\int_0^\infty R_{n'l'} \frac{dV_c}{dr} R_{nl} r^2 dr &= \int_0^\infty R_{n'l'} R_{nl} dr \propto (1 - \delta_{nn'})(\delta_{l(l'+1)} + \delta_{l(l'-1)}) \\
+			\end{align*}
+
+			The lowest states affected by perturbation is mixing between $3s$ and $4p$ state. The energy  splitting is:
+			\begin{align*}
+				\bra{3s} V \ket{4p} 
+				&= \frac{Z}{-e} \int_0^\infty dr R_{30}(r) R_{41}(r) \frac{4\pi}{3} \bra{00\nicefrac{1}{2}\nicefrac{1}{2}} \sigma_z Y_1^0 \ket{10\nicefrac{1}{2}\nicefrac{1}{2}}\\
+				&= \frac{Z}{-e} \int_0^\infty dr R_{30}(r) R_{41}(r) \frac{4\pi}{3} \int_0^{2\pi} d\phi \int_{-1}^1 d(\cos \theta) \sqrt{\frac{1}{4\pi}} \sqrt{\frac{3}{4\pi}} \cos\theta \\
+				&= \frac{Z}{-e} \int_0^\infty dr R_{30}(r) R_{41}(r) \frac{4\pi}{3} \int_0^{2\pi} d\phi \int_{-1}^1 d(\cos \theta) \sqrt{\frac{1}{4\pi}} \sqrt{\frac{3}{4\pi}} \cos\theta \\
+				&= \frac{Z}{-e} \sqrt{\frac{1}{3}} \int_0^\infty dr R_{30}(r) R_{41}(r)
+			\end{align*}
+
+			Therefore, the energy shift of the lowest level is (in second order):
+			\begin{align*}
+				\Delta = \left( \frac{-\mu Z I_R}{e\sqrt{3}} \right)^2 / (E_3 - E_4)
+			\end{align*}
+		 	
 		\end{tcolorbox}
 	\end{section}
 
 	\newpage
 	\begin{section}{Sakurai 5.18}
-		Work out the {\it quadratic} Zeeman effect for the ground-state hydrogen atom $\left[\bra{x}\ket{0} = \left( 1/\sqrt{\pi a_0^3} e^{-r/a_0} \right)\right]$ due to the usually neglected $e^2 A^/2m_ec^2$-term in the Hamiltonian taken to first order. Write the energy shift as:
+		Work out the {\it quadratic} Zeeman effect for the ground-state hydrogen atom $\left[\bra{x}\ket{0} = \left( 1/\sqrt{\pi a_0^3}\right) e^{-r/a_0} \right]$ due to the usually neglected $e^2 A^2/2m_ec^2$-term in the Hamiltonian taken to first order. Write the energy shift as:
 		\begin{align*}
 			\Delta = -\frac{1}{2}\chi\bs{B}^2
 		\end{align*}
 		and obtain an expression for {\it diamagnetic susceptibility, $\chi$}.
+		
 		\begin{tcolorbox}[breakable]
+			The perturbation is $V = e^2 \bs{A}^2/2mc^2 = (2/3)e^2B^2r^2/8mc^2$, and the wavefunction is $\psi(x) = \bra{x}\ket{0} = = \left( 1/\sqrt{\pi a_0^3}\right) e^{-r/a_0}$.
+
+			Therefore, the energy split is given by:
+			\begin{align*}
+				\Delta &= \bra{0}V\ket{0} = \int V \psi(x)^2 dx \\
+				&= \frac{(2/3)e^2B^2}{8mc^2} \frac{1}{\pi a_0^3} 4\pi \int r^2 e^{-2r/a_0} dr \\
+				&= \frac{e^2B^2}{8mc^2} \frac{1}{3 a_0^3} \frac{4!}{(2/a_0)^5} \\
+				&= -\frac{1}{2} \chi B^2
+			\end{align*}
 		\end{tcolorbox}
 	\end{section}
 
@@ -151,7 +326,38 @@
 			3^{1/3} = 1.442, \quad 5^{1/3} = 1.710, \quad 3^{2/3} = 2.080, \quad \pi^{2/3} = 2.145 
 		\end{align*}
 		The exact value of the lowest eigenvalue can be shown to be 1.019.
+		
 		\begin{tcolorbox}[breakable]
-	\end{tcolorbox}
+			Using variational method, we can find an upper bound for $E_0$, i.e.
+			\begin{align*}
+				\bar{H} = \frac{\bra{\tilde{0}}H\ket{\tilde{0}}}{\bra{\tilde{0}}\ket{\tilde{0}}}
+			\end{align*}
+
+			In this case: $H = -d^2/dx^2 + |x|$, with eigenvalue of $\lambda$.
+
+			Therefore, we have:
+			\begin{align*}
+				\bra{\tilde{0}}-\frac{d^2}{dx^2}\ket{\tilde{0}} &= \int_{-\alpha}^{\alpha} \psi \frac{d^2\psi}{dx^2}  dx + \int_{-\alpha}^{\alpha} |x| c^2(\alpha - |x|)^2  dx \\
+				&= -\int_{-\epsilon}^{\epsilon} c\alpha \frac{d^2}{dx^2} c(\alpha - |x|) dx + 2\int_{0}^{\alpha} x c^2(\alpha - x)^2  dx \\
+				&= -c\alpha \lim_{\epsilon \to 0^+}(\psi'(\epsilon) - \psi'(-\epsilon)) + \alpha^4 c^2/6 \\
+				&= 2c^2\alpha + \alpha^4 c^2/6 \\
+				&= c\alpha \frac{d^2}{dx^2} c(\alpha - |x|) dx \\
+				\bra{\tilde{0}}\ket{\tilde{0}} &= \int_{-\alpha}^{\alpha} c^2(\alpha - |x|) dx \\
+				&= (2/3) \alpha^3 c^2
+			\end{align*}
+
+			Therefore: 
+			\begin{align*}
+				\bar{H} &= \frac{\bra{\tilde{0}}H\ket{\tilde{0}}}{\bra{\tilde{0}}\ket{\tilde{0}}} \\
+				&= \frac{2c^2\alpha + \alpha^4 c^2/6}{(2/3) \alpha^3 c^2} \\
+			\end{align*}
+
+			Minimizing $d\bar{H}/d\alpha$ with respect to $\alpha$ gives:
+			\begin{align*}
+				\frac{d\bar{H}}{0} &= -6/\alpha^3 + 1/4 = 0
+			\end{align*}
+
+			Therefore, $\alpha = 24^{1/3} = 1.442$, and $\bar{H}_{min} = 1.0817 > 1.019$.
+		\end{tcolorbox}
 	\end{section}
 	\end{document}
