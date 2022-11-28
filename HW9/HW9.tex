@@ -1,0 +1,268 @@
+\documentclass{article}
+\usepackage{../acad} % https://github.com/rstanuwijaya/latex-template
+
+\renewcommand{\sectionPrefix}{Problem }
+
+\title{PHYS 5260 HW9}
+\author{TANUWIJAYA, Randy Stefan \footnote{\LaTeX\ source code: \url{https://github.com/rstanuwijaya/hkust-advanced-qm/}}
+\\ (20582731) \\ rstanuwijaya@connect.ust.hk}
+\affil{Department of Physics - HKUST}
+\date{\today}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\expc}[1]{\left<#1\right>}
+
+\begin{document}
+\maketitle
+\begin{section}{Sakurai 5.24}
+Consider a particle bound in a simple harmonic-oscillator potential. Initially ($t < 0$), it is in the ground state. At $t=0$ a perturbation of the form
+\begin{align*}
+	H'(x,t) = Ax^2 e^{-t/\tau}
+\end{align*}
+is switched on. Using time-dependent perturbation theory, calculate the probability that after a sufficiently long time ($t \gg \tau$), the system will have a transition to a given excited state. Consider all final states.
+
+\begin{tcolorbox}[breakable]
+	We can first expand the $x^2$ term in terms of raising and lowering operators, i.e.:
+	\begin{align*}
+		x^2 = \frac{\hbar}{2m\omega_0} \left( a^\dagger a^\dagger + a^\dagger a + a a^\dagger + a a \right)
+	\end{align*}
+
+	Applying on the ground state:
+	\begin{align*}
+		\bra{n} x^2 \ket{0} = \frac{\hbar}{2m\omega_0} \sqrt{2} \delta_{2,n}
+	\end{align*}
+
+	Then, we can write the (first order) transition probability as:
+	\begin{align*}
+		c_n^{(1)}                                      & = \frac{-i}{\hbar} \int_0^t e^{i\omega_{n0}t'} \bra{n} V \ket{0} dt'                                       \\
+		c_2^{(1)}                                      & = \frac{-i}{\hbar} A \frac{\hbar}{2m \omega_0} \int_0^t e^{2i \omega_0 t'} e^{-t'/\tau} dt'                \\
+		\left| c_2^{(1)} \right|^2                     & = \frac{A^2}{2m^2 \omega_0^2} \frac{e^{2t/\tau} - 2e^{-t/\tau} \cos \omega_0 t + 1}{\omega_0^2 + 1/\tau^2} \\
+		\lim_{t \to \infty} \left| c_2^{(1)} \right|^2 & = \frac{A^2}{2m^2 \omega_0^2} \frac{\tau^2}{1 + \omega_0^2 \tau^2}
+	\end{align*}
+	where $\omega_{20} = (E_2 - E_0)/\hbar = 2\omega_0$ and transitions only occur fron $\ket{0}$ to $\ket{2}$ in the first order. For higher order, transitions may occur from $\ket{0} \to \ket{2n}$.
+
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 5.27}
+Consider a particle in one dimension moving under the influence of some time-independent potential. The energy levels and the corrsponding eigenfunctions for this problem are assumed to be known. We now subject the particle to a travelling pulse represented by a time-dependent potential,
+\begin{align*}
+	V(t) = A \delta(x-ct)
+\end{align*}
+\begin{enumerate}
+	\item Suppose that at $t=-\infty$ the particle is known to be in the ground state whose energy eigenfunction is $\bra{x}\ket{i} = u_i(x)$. Obtain the probability for finding the system in some excited state with energy eigenfunction $\bra{x}\ket{f} = u_f(x)$ at $t=\infty$.
+
+	\begin{tcolorbox}[breakable]
+		The probability density for the particle to be in the excited state at $t -> \infty$ is given by:
+		\begin{align*}
+			c_f^{(1)} & = \frac{-i}{\hbar} \int_{-\infty}^{\infty} dt' e^{i\omega_{fi} t'} \bra{f} V \ket{i}                                                              \\
+			          & = \frac{-i}{\hbar} \int_{-\infty}^{\infty} dt' \int_{-\infty}^{\infty} dx\; e^{i\omega_{fi} t'} A \delta(x - ct') u^*_f(x) u_i(x)                 \\
+			          & = \frac{-iA}{c\hbar} \int_{-\infty}^{\infty} dx \left( \int_{-\infty}^{\infty} cdt'\; e^{i\omega_{fi} t'} \delta(x - ct') \right) u^*_f(x) u_i(x) \\
+			          & = \frac{-iA}{\hbar c} \int_{-\infty}^{\infty} dx\; e^{i\omega_{fi} x/c} u^*_f(x) u_i(x)
+		\end{align*}
+		where the probability to end up in state $\ket{f}$ is just $\left|c_f^{(1)}\right|^2$.
+	\end{tcolorbox}
+
+	\item Interpret your result in (a) physically by regarding the $\delta$-function pulse as a superposition of harmonic perturbations; recall
+	\begin{align*}
+		\delta(x-ct ) = \frac{1}{2\pi c} \int_{-\infty}^{\infty} d\omega\; e^{i\omega [(x/c) - t]}
+	\end{align*}
+	Emphasize the role played by energy conservation which holds even quantum-mechanically as long as the perturbation has been on for a very long time.
+
+	\begin{tcolorbox}[breakable]
+		In this case, we can assume the travelling pulse as the superposition of harmonic perturbations $e^{i\omega x/c} e^{-i\omega t}$. Then after integrating with respect to $t'$ (similar in (a)), we get:
+		\begin{align*}
+			\int_{-\infty}^{\infty} cdt'\; e^{i\omega_{fi} t'} \delta(x - ct')
+			 & = \frac{1}{2\pi} \int_{-\infty}^{\infty} dt'\; \int_{-\infty}^{\infty} d\omega\; e^{i\omega [(x/c) - t']} e^{i\omega_{fi} t'}    \\
+			 & = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega\; \int_{-\infty}^{\infty} dt'\; e^{i\omega [(x/c) - t']} e^{i\omega_{fi} t'}    \\
+			 & = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega\; e^{i\omega x/c} \int_{-\infty}^{\infty} dt'\; e^{i (\omega_{fi} - \omega) t'} \\
+			 & = \frac{1}{2\pi} \int_{-\infty}^{\infty} d\omega\; e^{i\omega x/c} \left( 2\pi\; \delta(\omega_{fi} - \omega) \right)            \\
+			 & = e^{i \omega_{fi} x/c}
+		\end{align*}
+		Which yield the same result as (a). In this case, we can see that the pulse transfers energy $\hbar omega_{fi}$ to the system, and the system will be in the excited state $\ket{f}$ with probability $\left|c_f^{(1)}\right|^2$.
+	\end{tcolorbox}
+\end{enumerate}
+
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 5.30}
+Consider a two-level system with $E_1 < E_2$. There is a time-dependent potential that connects the wto levels as follows:
+\begin{align*}
+	V_{11} = V_{22} = 0, \quad V_{12} = \gamma e^{i \omega t}, \quad V_{21} = \gamma e^{-i \omega t} \quad \text{($\gamma$ real).}
+\end{align*}
+At t=0, it is known that only the lower level is populated - that is, $c_1(0) = 1$, $c_2(0) = 0$.
+
+\begin{enumerate}
+	\item Find $|c_1(t)|^2$ and $|c_2(t)|^2$ for $t > 0$ by {\it exactly} solving the coupled differential equation
+	\begin{align*}
+		i\hbar \dot{c_k} = \sum_{n=1}^2 V_{kn} e^{i \omega_{kn} t} c_n
+	\end{align*}
+
+	\begin{tcolorbox}[breakable]
+		\begin{align*}
+			i \hbar \dot{c_1} & = V_{12} \gamma e^{-i\omega_0 t} c_2 = \gamma e^{i (\omega - \omega_0)t} c_2  \\
+			i \hbar \dot{c_2} & = V_{21} \gamma e^{i \omega_0 t} c_1 = \gamma e^{-i (\omega - \omega_0)t} c_1
+		\end{align*}
+		where $\omega_0 \triangleq (E_2 - E_1)/\hbar$. To simplify the equations, we can substitue $c_1 = a_1 e^{i (\omega - \omega_0)t/2}$ and $c_2 = a_2 e^{i (\omega - \omega_0)t/2}$ to get:
+		\begin{align*}
+			i \hbar \dot{a_1} - \hbar a_1 (\omega - \omega_0)/2 & = \gamma a_2 \\
+			i \hbar \dot{a_2} + \hbar a_2 (\omega - \omega_0)/2 & = \gamma a_1
+		\end{align*}
+		Then, we can use the following substitution to solve the differential equations, $a_1 = b_1 e^{i \Omega t}$ and $a_2 = b_2 e^{i \Omega t}$, where $b_1, b_2$ are constants.
+		\begin{align*}
+			-\hbar (\Omega + (\omega - \omega_0)/2) b_1 = \gamma b_2 \\
+			-\hbar (\Omega - (\omega - \omega_0)/2) b_2 = \gamma b_1
+		\end{align*}
+		Solving for $\Omega$, we get:
+		\begin{align*}
+			\Omega = \pm \sqrt{\frac{\gamma^2}{\hbar^2} + \frac{(\omega - \omega_0)^2}{4}}
+		\end{align*}
+		Taking the positive solution for $\Omega$, we get the following solution for $a_1$ and $b_2$:
+		\begin{align*}
+			a_1 & = \alpha e^{i \Omega t} + \beta e^{-i \Omega t}                  \\
+			a_2 & = r_\alpha \alpha e^{i \Omega t} + r_\beta \beta e^{-i \Omega t}
+		\end{align*}
+		where $r_\alpha$ and $r_\beta$ can be obtained by substituting each solution back to the coupled equations.
+		\begin{align*}
+			r_\alpha & = \frac{b_2}{b_1} = -\frac{\Omega + (\omega - \omega_0)/2}{\gamma/\hbar} = -\frac{\gamma/\hbar}{\Omega - (\omega - \omega_0)/2} \\
+			r_\beta  & = \frac{b_2}{b_1} = \frac{\Omega - (\omega - \omega_0)/2}{\gamma/\hbar} = \frac{\gamma/\hbar}{\Omega + (\omega - \omega_0)/2}
+		\end{align*}
+
+		Then, using the initial condition: $c_1(0) = a_1(0) = \alpha + \beta = 1$, and $c_2(0) = a_2(0) = r_\alpha \alpha + r_\beta \beta = 0$, we can solve for $\alpha$ and $\beta$:
+		\begin{align*}
+			a_2(t) & = r_\alpha \alpha e^{i \Omega t} + r_\beta \beta e^{-i \Omega t} \\
+			       & = 2ir_\alpha \alpha \sin(\Omega t)                               \\
+			       & = 2i \frac{r_\alpha r\beta}{r_\beta - r_\alpha} \sin(\Omega t)   \\
+			       & = \frac{\gamma}{i \hbar \Omega} \sin(\Omega t)                   \\
+		\end{align*}
+		Therefore:
+		\begin{align*}
+			c_2(t)     & = \frac{\gamma}{i \hbar \Omega} e^{i (\omega - \omega_0)t/2} \sin(\Omega t) \\
+			|c_2(t)|^2 & = \frac{\gamma^2}{\hbar^2 \Omega^2} \sin^2(\Omega t)                        \\
+			|c_1(t)|^2 & = 1 - \frac{\gamma^2}{\hbar^2 \Omega^2} \sin^2(\Omega t)
+		\end{align*}
+	\end{tcolorbox}
+
+	\item Do the same problem using time-dependent perturbation theory to lowest non-vanishing order. Compare the two approaches for small values of $\gamma$. Treat the following two cases separately: (i) $\omega$ very different from $\omega_{21}$ and (ii) $\omega$ close to $\omega_{21}$.
+
+	\begin{tcolorbox}[breakable]
+		Using time-dependent perturbation theory, the transition probability is given by:
+		\begin{align*}
+			c_2(t) & = \frac{i}{\hbar } \int_0^t \bra{n}V_i(t')\ket{i} dt' \\
+			       & = \frac{i}{\hbar } \int_0^t e^{i \omega_0 t'} V_{ni}(t') dt' \\
+			       & = \frac{i}{\hbar } \int_0^t e^{i \omega_0 t'} V_{ni}(t') dt' \\
+			       & = \frac{i}{\hbar } \int_0^t e^{i \omega_0 t'} \gamma e^{i \omega t'} dt' \\
+			       & = \frac{i}{\hbar } \frac{e^{i (\omega - \omega_0) t} - 1}{\omega - \omega_0} \\
+			|c_2 (t)|^2 & = \frac{\gamma^2}{\hbar^2 (\omega - \omega_0)/4} \sin^2\left[ (\omega - \omega_0)t/2 \right] \\
+		\end{align*}
+
+		For $|\omega - \omega_0|/2 \gg \gamma$, the exact solution agree to the perturbation solution. In contrast, for $|\omega - \omega_0|/2 \ll \gamma$ (near resonance), the perturbation solution is different from the exact solution.
+	\end{tcolorbox}
+\end{enumerate}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 5.33}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+Repeat Problem 5.32, but with the atomic hydrogen Hamiltonian
+\begin{align*}
+	H = A \bs{S_1} \cdot \bs{S_2} + \left( \frac{eB}{m_e c} \right) \bs{S_1} \cdot \bs{B}
+\end{align*}
+where in the hyperfine term, $A \bs{S_1} \cdot \bs{S_2}$, $\bs{S_1}$ is the electron spin and $\bs{S_2}$ is the proton spin. [Note that this problem has less symmetry than the positronium case].
+
+\begin{tcolorbox}[breakable]
+	The unperturbed energy levels are given by $H_0 = (A/2) \left( S^2 - S_1^2 - S_2^2 \right)$:
+	\begin{align*}
+		E_{singlet} &= \frac{-3\hbar^2A}{4}	&& \ket{0, 0} = \frac{1}{\sqrt{2}} \left( \ket{\up \down} - \ket{\down \up} \right) \\
+		E_{triplet} &= \frac{-\hbar^2A}{4}  &&\begin{cases}
+			\ket{1, -1} &= \ket{\down \down} \\
+			\ket{1, 0} &= \frac{1}{\sqrt{2}} \left( \ket{\up \up} + \ket{\down \down} \right) \\ 
+			\ket{1, 1} &= \ket{\up \up}
+		\end{cases}
+	\end{align*}
+
+	Assume the perturbation is in the form $V = \bs{B} \cdot \bs{S_1} = \omega S_{1z}$
+	\begin{align*}
+		V\ket{0, 0} = \omega \hbar/2 \ket{1, 1} \\
+		V\ket{1, -1} = \omega \hbar/2 \ket{1, -1} \\
+		V\ket{1, 0} = \omega \hbar/2 \ket{0, 0} \\
+		V\ket{1, 1} = \omega \hbar/2 \ket{1, 1} 
+	\end{align*}
+
+	Therefore we can calculate the energy shift of first order perturbation for states $\ket{1, \pm 1}$:
+	\begin{align*}
+		\Delta^{(1)} (\ket{1, \pm 1})  &= \bra{1, \pm 1} V \ket{1, \pm 1} \\
+		&= \omega \hbar/2
+	\end{align*}
+
+	For the states $\ket{0, 0}$ and $\ket{1, 0}$, we need to go to the second order perturbation theory to get the energy shift:
+	\begin{align*}
+		\Delta^{(2)} (\ket{0, 0}) &= \frac{|\bra{1,0}V\ket{0,0}|^2}{E_{singlet} - E_{triplet}} \\
+		&= \frac{\omega^2 \hbar^2/4}{-\hbar^2A} = -\frac{\omega^2}{4A} \\
+		\Delta^{(2)} (\ket{1, 0}) &= \frac{|\bra{0,0}V\ket{1,0}|^2}{E_{triplet} - E_{singlet}} \\
+		&= \frac{\omega^2 \hbar^2/4}{\hbar^2A} = \frac{\omega^2}{4A}
+	\end{align*}
+
+	We can see that the $\ket{1, \pm 1}$ states dont get mixed. The $\ket{0, 0}$ and $\ket{1, 0}$ states get mixed. The eigenvectors to the first order are:
+	\begin{align*}
+		\ket{0, 0} &\rightarrow \ket{0, 0} + \frac{\bra{1,0} V \ket{0,0}}{E_{singlet} - E_{triplet}} \ket{1, 0} \\
+		\ket{0, 0} &\rightarrow \ket{0, 0} - \frac{\omega}{2 \hbar A} \ket{1, 0} \\
+		\ket{1, 0} &\rightarrow \ket{1, 0} + \frac{\omega}{2 \hbar A} \ket{0, 0}
+	\end{align*}
+
+	For time-dependent magnetic field, we can write the Hamiltonian as:
+	\begin{align*}
+		V = e^{i \Omega t} \omega S_{1z}
+	\end{align*}
+	Here we assumed that the magnetic field must be on the z-axis direction in order to have the mixing between $\ket{0,0}$ and $\ket{1,0}$.
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 5.36}
+Show that $\bs{A}_n (\bs{R})$ defined in (5.6.23) is a purely real quantity.
+
+\begin{tcolorbox}[breakable]
+	Recall $\bs{A}_n (\bs{R})$
+	\begin{align*}
+		\bs{A}_n (\bs{R}) = i \bra{n;t} \left( \nabla_{\bs{R}} \ket{i;t} \right)
+	\end{align*}
+
+	Therefore, we just need to show that $ \alpha \triangleq \bra{n;t} \left( \nabla_{\bs{R}} \ket{i;t} \right)$ is a purely imaginary quantity. We can use the following identity:
+	\begin{align*}
+		\nabla_{\bs{R}} \bra{n;t} \ket{n;t} &= (\nabla_{\bs{R}} \bra{n;t}) \ket{n;t} + \bra{n;t} (\nabla_{\bs{R}} \ket{n;t}) \\
+		0 &= (\nabla_{\bs{R}} \bra{n;t}) \ket{n;t} + \bra{n;t} (\nabla_{\bs{R}} \ket{n;t}) \\
+		0 &= \left[ \bra{n;t} (\nabla_{\bs{R}} \ket{n;t}) \right]^*  + \bra{n;t} (\nabla_{\bs{R}} \ket{n;t})
+	\end{align*}
+	Therefore, $\alpha = -\alpha^*$. Thus, $\alpha$ is purely imaginary.
+\end{tcolorbox}
+\end{section}
+
+\newpage
+\begin{section}{Sakurai 5.39}
+A particle of mass $m$ constrained to move in one dimension is confined within $0 < x < L$ by an infinite-wall potential
+\begin{align*}
+	V & = \infty \qquad \text{for $x < 0$, $x > L$} \\
+	V & = 0 \qquad \text{for $0 \leq x \leq L$}
+\end{align*}
+
+Obtain an expression for the density of states (that is, the number of states per unit energy interval) for \textit{high} energies as a function of $E$. (Check your dimension!)
+
+\begin{tcolorbox}[breakable]
+	For particle in a box, the energy level is given by:
+	\begin{align*}
+		E = \frac{n^2 \pi^2 \hbar^2}{2mL^2}
+	\end{align*}
+
+	The density of states is given by:
+	\begin{align*}
+		\frac{dn}{dE} &= \frac{mL^2}{\pi^2 \hbar^2} \frac{1}{n} \\
+		&= \frac{mL^2}{\pi^2 \hbar^2} \frac{\pi \hbar}{L} \sqrt{\frac{1}{2mE}} \\
+		&= \frac{L}{\pi \hbar} \sqrt{\frac{m}{2E}}
+	\end{align*}
+\end{tcolorbox}
+\end{section}
+\end{document}
